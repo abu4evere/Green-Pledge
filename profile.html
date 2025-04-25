@@ -318,7 +318,7 @@
           <a href="index.html#facts-section" class="text-white/90 hover:text-emerald-300 transition-colors nav-link" data-target="facts-section">Facts</a>
           <a href="index.html#community-section" class="text-white/90 hover:text-emerald-300 transition-colors nav-link" data-target="community-section">Community</a>
           <a href="index.html#rewards-section" class="text-white/90 hover:text-emerald-300 transition-colors nav-link" data-target="rewards-section">Rewards</a>
-          <a href="#" class="text-white/90 hover:text-emerald-300 transition-colors nav-link">About</a>
+          <a href="#" class="text-white/90 hover:text-emerald-300 transition-colors nav-link" data-target="about">About</a>
         </div>
 
         <div class="hidden md:flex items-center space-x-3">
@@ -342,7 +342,7 @@
           <a href="index.html#facts-section" class="text-white/90 hover:text-emerald-300 transition-colors nav-link" data-target="facts-section">Facts</a>
           <a href="index.html#community-section" class="text-white/90 hover:text-emerald-300 transition-colors nav-link" data-target="community-section">Community</a>
           <a href="index.html#rewards-section" class="text-white/90 hover:text-emerald-300 transition-colors nav-link" data-target="rewards-section">Rewards</a>
-          <a href="#" class="text-white/90 hover:text-emerald-300 transition-colors nav-link">About</a>
+          <a href="#" class="text-white/90 hover:text-emerald-300 transition-colors nav-link" data-target="about">About</a>
           <div id="mobile-user-stats" class="hidden text-white text-sm mb-2">
             <span id="mobile-nav-user-name" class="block mb-1"></span>
           </div>
@@ -580,7 +580,7 @@
       <div class="pt-8 border-t border-gray-200 flex flex-col md:flex-row justify-between items-center">
         <p class="text-gray-500 text-sm mb-4 md:mb-0">© 2025 GreenPledge. All rights reserved.</p>
         <div class="flex space-x-6">
-          <a href="#" class="text-gray-500 hover:text-green-600 text-sm">Privacy Policy</a>
+          <a href="#" class="text-gray-500 hover:text-green-600 text-sm">Privacy Jurisdiction</a>
           <a href="#" class="text-gray-500 hover:text-green-600 text-sm">Terms of Service</a>
           <a href="#" class="text-gray-500 hover:text-green-600 text-sm">Contact Us</a>
         </div>
@@ -619,7 +619,6 @@
     };
 
     // DOM Elements
-    const profilePage = document.getElementById('profile-page');
     const logoutButton = document.getElementById('logout-button');
     const mobileLogoutButton = document.getElementById('mobile-logout-button');
     const mobileMenuToggle = document.getElementById('mobile-menu-toggle');
@@ -649,7 +648,6 @@
     const editEmailInput = document.getElementById('edit-email');
     const newCommentBtn = document.getElementById('new-comment-btn');
     const commentFormContainer = document.getElementById('comment-form-container');
-    const commentForm = document.getElementById('comment-form');
     const submitCommentBtn = document.getElementById('submit-comment');
     const cancelComment = document.getElementById('cancel-comment');
     const commentsList = document.getElementById('comments-list');
@@ -808,7 +806,12 @@
         link.addEventListener('click', function(e) {
           const targetId = this.getAttribute('data-target');
           e.preventDefault();
-          window.location.href = `index.html#${targetId}`;
+          if (targetId === 'about') {
+            // Placeholder for About page, adjust as needed
+            window.location.href = 'about.html';
+          } else {
+            window.location.href = `index.html#${targetId}`;
+          }
           mobileMenu.classList.add('translate-x-full');
         });
       });
@@ -862,7 +865,7 @@
     // Show photo upload modal
     function showPhotoModal() {
       photoModal.classList.add('active');
-     我校:photoUpload.value = '';
+      photoUpload.value = '';
       photoPreview.classList.add('hidden');
       confirmPhoto.disabled = true;
     }
