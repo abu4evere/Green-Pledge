@@ -234,7 +234,7 @@
       padding: 0.5rem 1rem;
       border-radius: 0.5rem;
       transition: background-color 0.3s ease;
-      font-size: 0.875rem;
+      font-size:Karen: 0.875rem;
       min-width: 80px;
       text-align: center;
     }
@@ -616,77 +616,6 @@
     </div>
   </section>
 
-  <!-- Profile Section (Hidden by Default) -->
-  <section id="profile-section" class="max-w-7xl mx-auto mb-20 py-20 hidden">
-    <div class="flex flex-col md:flex-row gap-6">
-      <div class="card w-full md:w-1/3">
-        <div class="flex items-center mb-4">
-          <div class="w-12 h-12 rounded-full bg-gray-200 flex items-center justify-center text-gray-800 font-bold mr-4">
-            <i class="fas fa-user text-xl"></i>
-          </div>
-          <div>
-            <h3 id="profile-name" class="text-xl font-bold text-gray-800"></h3>
-            <p id="profile-email" class="text-sm text-gray-600"></p>
-            <p id="profile-join-date" class="text-sm text-green-600"></p>
-          </div>
-        </div>
-        <button id="edit-profile-button" class="flat-btn-secondary w-full mt-4">
-          Edit Profile
-        </button>
-      </div>
-      <div class="w-full md:w-2/3 space-y-6">
-        <div class="grid grid-cols-1 sm:grid-cols-3 gap-6">
-          <div class="card text-center">
-            <div class="text-lg font-semibold text-gray-800 mb-2">Days Active</div>
-            <div id="profile-days-active" class="text-2xl font-bold text-gray-800">0</div>
-          </div>
-          <div class="card text-center">
-            <div class="text-lg font-semibold text-gray-800 mb-2">Challenges Completed</div>
-            <div id="profile-challenges-completed" class="text-2xl font-bold text-gray-800">0</div>
-          </div>
-          <div class="card text-center">
-            <div class="text-lg font-semibold text-gray-800 mb-2">CO₂ Reduced</div>
-            <div id="profile-co2-reduced" class="text-2xl font-bold text-gray-800">0 kg</div>
-          </div>
-        </div>
-        <div class="card">
-          <h3 class="text-lg font-semibold text-gray-800 mb-4">Saved Challenges</h3>
-          <div id="saved-challenges-list" class="text-gray-600">
-            You haven't saved any challenges yet. Click "New Challenge" to get started!
-          </div>
-        </div>
-        <div class="card">
-          <div class="flex justify-between items-center mb-4">
-            <h3 class="text-lg font-semibold text-gray-800">Today's Challenge</h3>
-            <button id="new-challenge-button" class="flat-btn text-sm">
-              New Challenge
-            </button>
-          </div>
-          <p id="profile-today-challenge" class="text-gray-600 mb-4">Loading today's challenge...</p>
-          <div class="flex space-x-4">
-            <button id="profile-try-challenge-button" class="flat-btn">
-              I Did This!
-            </button>
-            <button id="profile-save-challenge-button" class="flat-btn-secondary">
-              Save for Later
-            </button>
-          </div>
-          <div id="profile-challenge-completed" class="hidden flex items-center mt-4 text-green-600">
-            <i class="fas fa-trophy mr-2"></i> Challenge Completed!
-          </div>
-          <div class="mt-4">
-            <h4 class="text-sm font-semibold text-gray-800 flex items-center">
-              <i class="fas fa-lightbulb mr-2 text-green-500"></i> Why This Matters
-            </h4>
-            <p id="profile-challenge-impact-text" class="text-gray-600 text-sm">
-              Every small action contributes to a healthier planet. This challenge helps reduce waste and conserve resources.
-            </p>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
   <!-- Daily Challenge Section -->
   <section id="challenges-section" class="max-w-4xl mx-auto mb-20 py-20">
     <div class="card">
@@ -1046,20 +975,6 @@
     const ecoWarriorsList = document.getElementById('eco-warriors-list');
     const navUserName = document.getElementById('nav-user-name');
     const mobileNavUserName = document.getElementById('mobile-nav-user-name');
-    const profileSection = document.getElementById('profile-section');
-    const profileName = document.getElementById('profile-name');
-    const profileEmail = document.getElementById('profile-email');
-    const profileJoinDate = document.getElementById('profile-join-date');
-    const profileDaysActive = document.getElementById('profile-days-active');
-    const profileChallengesCompleted = document.getElementById('profile-challenges-completed');
-    const profileCo2Reduced = document.getElementById('profile-co2-reduced');
-    const savedChallengesList = document.getElementById('saved-challenges-list');
-    const profileTodayChallenge = document.getElementById('profile-today-challenge');
-    const profileChallengeImpactText = document.getElementById('profile-challenge-impact-text');
-    const profileTryChallengeButton = document.getElementById('profile-try-challenge-button');
-    const profileSaveChallengeButton = document.getElementById('profile-save-challenge-button');
-    const profileChallengeCompleted = document.getElementById('profile-challenge-completed');
-    const newChallengeButton = document.getElementById('new-challenge-button');
     const userXP = document.getElementById('user-xp');
     const refreshXPButton = document.getElementById('refresh-xp');
     const redeemButtons = document.querySelectorAll('.redeem-btn');
@@ -1079,7 +994,6 @@
 
         updateAuthUI();
         displayUserNameWithBadge();
-        updateProfileUI();
         updateXP();
       }
       const storedCompletedChallenges = getCompletedChallengesWithProof();
@@ -1090,24 +1004,6 @@
       setupEventListeners();
       updateTestimonialsScroll();
       populateEcoWarriors();
-    }
-
-    // Update profile UI
-    function updateProfileUI() {
-      if (!state.currentUser) return;
-      profileName.textContent = state.currentUser.name;
-      profileEmail.textContent = state.currentUser.email;
-      profileJoinDate.textContent = `Active member since ${new Date(state.currentUser.joinDate).getFullYear()}`;
-      const joinDate = new Date(state.currentUser.joinDate);
-      const today = new Date();
-      const daysActive = Math.floor((today - joinDate) / (1000 * 60 * 60 * 24));
-      profileDaysActive.textContent = daysActive;
-      profileChallengesCompleted.textContent = getCompletedChallenges();
-      profileCo2Reduced.textContent = `${getCompletedChallenges() * 10} kg`; // Example calculation
-      const savedChallenges = getSavedChallenges();
-      savedChallengesList.innerHTML = savedChallenges.length > 0 ? savedChallenges.map(ch => `<p class="text-gray-600">${ch}</p>`).join('') : "You haven't saved any challenges yet. Click 'New Challenge' to get started!";
-      profileTodayChallenge.textContent = state.currentChallenge;
-      profileChallengeImpactText.textContent = state.currentFact;
     }
 
     // Update XP display
@@ -1175,9 +1071,6 @@
       featuredChallenge.textContent = challenge;
       challengeImpactText.textContent = fact;
       document.getElementById('challenge-completed').classList.add('hidden');
-      profileTodayChallenge.textContent = challenge;
-      profileChallengeImpactText.textContent = fact;
-      profileChallengeCompleted.classList.add('hidden');
     }
 
     // Newsletter subscription handler
@@ -1319,8 +1212,12 @@
       signupButton.addEventListener('click', showSignupModal);
       mobileLoginButton.addEventListener('click', showLoginModal);
       mobileSignupButton.addEventListener('click', showSignupModal);
-      profileButton.addEventListener('click', showProfileSection);
-      mobileProfileButton.addEventListener('click', showProfileSection);
+      profileButton.addEventListener('click', () => {
+        window.location.href = 'profile.html';
+      });
+      mobileProfileButton.addEventListener('click', () => {
+        window.location.href = 'profile.html';
+      });
       logoutButton.addEventListener('click', handleLogout);
       mobileLogoutButton.addEventListener('click', handleLogout);
 
@@ -1357,22 +1254,13 @@
 
       ctaSignupButton.addEventListener('click', () => {
         if (state.isAuthenticated) {
-          showProfileSection();
+          window.location.href = 'profile.html';
         } else {
           showSignupModal();
         }
       });
 
       tryChallengeButton.addEventListener('click', () => {
-        if (!state.isAuthenticated) {
-          showLoginModal();
-          alert("Please log in to track your challenges!");
-          return;
-        }
-        showPhotoUploadModal();
-      });
-
-      profileTryChallengeButton.addEventListener('click', () => {
         if (!state.isAuthenticated) {
           showLoginModal();
           alert("Please log in to track your challenges!");
@@ -1415,7 +1303,6 @@
           saveUser(state.currentUser);
 
           document.getElementById('challenge-completed').classList.remove('hidden');
-          profileChallengeCompleted.classList.remove('hidden');
           alert("Great job completing today's challenge! 🌱 You've earned 10 XP!");
           gtag('event', 'challenge_completed', {
             'event_category': 'Engagement',
@@ -1424,7 +1311,6 @@
           updateAuthUI();
           displayUserNameWithBadge();
           populateEcoWarriors();
-          updateProfileUI();
           updateXP();
           generateDailyChallenge();
           closePhotoUploadModalHandler();
@@ -1442,31 +1328,11 @@
         if (!savedChallenges.includes(state.currentChallenge)) {
           savedChallenges.push(state.currentChallenge);
           saveSavedChallenges(savedChallenges);
-          updateProfileUI();
           alert("Challenge saved to your profile! 📌");
         } else {
           alert("You've already saved this challenge!");
         }
       });
-
-      profileSaveChallengeButton.addEventListener('click', () => {
-        if (!state.isAuthenticated) {
-          showLoginModal();
-          alert("Please log in to save challenges!");
-          return;
-        }
-        const savedChallenges = getSavedChallenges();
-        if (!savedChallenges.includes(state.currentChallenge)) {
-          savedChallenges.push(state.currentChallenge);
-          saveSavedChallenges(savedChallenges);
-          updateProfileUI();
-          alert("Challenge saved to your profile! 📌");
-        } else {
-          alert("You've already saved this challenge!");
-        }
-      });
-
-      newChallengeButton.addEventListener('click', generateDailyChallenge);
 
       mobileMenuToggle.addEventListener('click', () => {
         mobileMenu.classList.toggle('translate-x-full');
@@ -1546,15 +1412,6 @@
       signupModal.querySelector('input').focus();
     }
 
-    // Show profile section
-    function showProfileSection() {
-      document.querySelectorAll('section:not(#profile-section)').forEach(section => {
-        section.classList.add('hidden');
-      });
-      profileSection.classList.remove('hidden');
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-    }
-
     // Close modal
     function closeModal() {
       authModal.classList.remove('opacity-100', 'pointer-events-auto', 'active');
@@ -1587,7 +1444,6 @@
       state.isAuthenticated = true;
       updateAuthUI();
       displayUserNameWithBadge();
-      updateProfileUI();
       updateXP();
       populateEcoWarriors();
       closeModal();
@@ -1633,7 +1489,6 @@
       state.isAuthenticated = true;
       updateAuthUI();
       displayUserNameWithBadge();
-      updateProfileUI();
       updateXP();
       populateEcoWarriors();
       closeModal();
@@ -1649,10 +1504,6 @@
       state.isAuthenticated = false;
       localStorage.removeItem('user');
       updateAuthUI();
-      document.querySelectorAll('section').forEach(section => {
-        section.classList.remove('hidden');
-      });
-      profileSection.classList.add('hidden');
       window.scrollTo({ top: 0, behavior: 'smooth' });
     }
 
@@ -1669,8 +1520,6 @@
         mobileLogoutButton.classList.remove('hidden');
         tryChallengeButton.textContent = "I Did This!";
         saveChallengeButton.textContent = "Save Challenge";
-        profileTryChallengeButton.textContent = "I Did This!";
-        profileSaveChallengeButton.textContent = "Save for Later";
         document.getElementById('user-stats').classList.remove('hidden');
         document.getElementById('mobile-user-stats').classList.remove('hidden');
       } else {
@@ -1684,8 +1533,6 @@
         mobileLogoutButton.classList.add('hidden');
         tryChallengeButton.textContent = "Try Challenge";
         saveChallengeButton.textContent = "Save for Later";
-        profileTryChallengeButton.textContent = "Try Challenge";
-        profileSaveChallengeButton.textContent = "Save for Later";
         document.getElementById('user-stats').classList.add('hidden');
         document.getElementById('mobile-user-stats').classList.add('hidden');
       }
