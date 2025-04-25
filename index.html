@@ -1059,7 +1059,6 @@
     const photoPreview = document.getElementById('photo-preview');
     const submitPhotoButton = document.getElementById('submit-photo');
     const cancelPhotoButton = document.getElementById('cancel-photo');
-    const ecoWarriorsList = document.getElementById('eco-warriors-list');
     const navUserName = document.getElementById('nav-user-name');
     const mobileNavUserName = document.getElementById('mobile-nav-user-name');
     const userXP = document.getElementById('user-xp');
@@ -1090,7 +1089,6 @@
       generateDailyChallenge();
       setupEventListeners();
       updateTestimonialsScroll();
-      populateEcoWarriors();
       updateNavBackground();
       setupScrollAnimations();
     }
@@ -1174,7 +1172,6 @@
       state.currentUser.badge = currentXP >= 100 ? "topWarrior" : "none";
       saveUser(state.currentUser);
       displayUserNameWithBadge();
-      populateEcoWarriors();
     }
 
     // Generate a new daily challenge
@@ -1293,31 +1290,6 @@
       }
     }
 
-    // Populate Top Eco Warriors
-    function populateEcoWarriors() {
-      const warriors = [
-        { name: state.currentUser ? state.currentUser.name : "Demo User", badge: state.currentUser ? state.currentUser.badge : "topWarrior", xp: state.currentUser ? getXP() : 150 },
-        { name: "EcoFan", badge: "topWarrior", xp: 120 },
-        { name: "GreenStar", badge: "topWarrior", xp: 100 },
-      ].sort((a, b) => b.xp - a.xp);
-
-      ecoWarriorsList.innerHTML = '';
-      warriors.forEach((warrior, index) => {
-        const place = index === 0 ? '🥇 1st Place' : index === 1 ? '🥈 2nd Place' : '🥉 3rd Place';
-        const warriorEl = document.createElement('div');
-        warriorEl.className = 'glassmorphism card-3d rounded-xl p-6 text-center';
-        warriorEl.innerHTML = `
-          <h3 class="text-xl font-bold text-gray-800 mb-2">${place}</h3>
-          <p class="text-gray-600">
-            ${warrior.name}
-            ${warrior.badge === "topWarrior" ? '<img src="eco-badge.png" alt="Top Eco Warrior Badge" class="badge-icon inline" />' : ''}
-            - ${warrior.xp} XP
-          </p>
-        `;
-        ecoWarriorsList.appendChild(warriorEl);
-      });
-    }
-
     // Set up event listeners
     function setupEventListeners() {
       loginButton.addEventListener('click', showLoginModal);
@@ -1422,7 +1394,6 @@
           });
           updateAuthUI();
           displayUserNameWithBadge();
-          populateEcoWarriors();
           updateXP();
           generateDailyChallenge();
           closePhotoUploadModalHandler();
@@ -1554,7 +1525,6 @@
       updateAuthUI();
       displayUserNameWithBadge();
       updateXP();
-      populateEcoWarriors();
       closeModal();
 
       setTimeout(() => {
@@ -1599,7 +1569,6 @@
       updateAuthUI();
       displayUserNameWithBadge();
       updateXP();
-      populateEcoWarriors();
       closeModal();
 
       setTimeout(() => {
