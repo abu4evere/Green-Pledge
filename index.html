@@ -24,16 +24,20 @@
   </script>
   <script defer src="https://cdn.tailwindcss.com?plugins=forms,typography,aspect-ratio,line-clamp"></script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css">
   <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/dompurify/2.4.1/purify.min.js"></script>
   <style>
-    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&family=Playfair+Display:wght@400;700&display=swap');
 
     :root {
-      --primary: #4CAF50;
-      --primary-dark: #388E3C;
-      --text: #333333;
-      --background: #E8F5E9;
+      --primary: #10b981;
+      --primary-dark: #059669;
+      --secondary: #f59e0b;
+      --accent: #34d399;
+      --background: #f0fdf4;
+      --text: #1f2937;
+      --text-light: #6b7280;
     }
 
     html {
@@ -42,7 +46,7 @@
 
     body {
       font-family: 'Poppins', sans-serif;
-      background-color: var(--background);
+      background: linear-gradient(135deg, #f0fdf4 0%, #ecfdf5 100%);
       min-height: 100vh;
       margin: 0;
       overflow-x: hidden;
@@ -50,59 +54,73 @@
     }
 
     h1, h2, h3, h4, h5, h6 {
-      font-family: 'Poppins', sans-serif;
+      font-family: 'Playfair Display', serif;
       font-weight: 700;
+    }
+
+    .glassmorphism {
+      background: rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(15px);
+      -webkit-backdrop-filter: blur(15px);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      box-shadow: 0 8px 32px rgba(31, 38, 135, 0.1);
+    }
+
+    .card-3d {
+      transition: transform 0.5s ease, box-shadow 0.5s ease;
+      transform: perspective(1000px) rotateX(0deg) rotateY(0deg);
+    }
+
+    .card-3d:hover {
+      transform: perspective(1000px) rotateX(5deg) rotateY(-5deg);
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
     }
 
     .nav-link {
       position: relative;
       transition: color 0.3s ease;
-      color: #333333 !important;
+      color: #1f2937 !important;
+    }
+
+    .nav-link::after {
+      content: '';
+      position: absolute;
+      bottom: -4px;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background: linear-gradient(90deg, var(--primary), var(--secondary));
+      transition: width 0.3s ease;
+    }
+
+    .nav-link:hover::after {
+      width: 100%;
     }
 
     .nav-link:hover {
       color: var(--primary) !important;
     }
 
-    .hero-section {
+    .glow-btn {
       position: relative;
-      min-height: 80vh;
-      padding-top: 80px;
-      text-align: center;
+      overflow: hidden;
+      z-index: 1;
     }
 
-    .flat-btn {
-      background-color: var(--primary);
-      color: white;
-      padding: 12px 24px;
-      border-radius: 50px;
-      font-weight: 500;
-      transition: background-color 0.3s ease;
+    .glow-btn::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+      transition: left 0.5s ease;
+      z-index: -1;
     }
 
-    .flat-btn:hover {
-      background-color: var(--primary-dark);
-    }
-
-    .flat-btn-secondary {
-      background-color: white;
-      color: var(--primary);
-      border: 2px solid var(--primary);
-      padding: 10px 22px;
-      border-radius: 50px;
-      font-weight: 500;
-      transition: background-color 0.3s ease;
-    }
-
-    .flat-btn-secondary:hover {
-      background-color: #f0f0f0;
-    }
-
-    .card {
-      background-color: white;
-      border-radius: 16px;
-      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
-      padding: 24px;
+    .glow-btn:hover::before {
+      left: 100%;
     }
 
     .social-icon {
@@ -114,35 +132,97 @@
       color: var(--primary);
     }
 
+    .fade-in {
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.8s ease, transform 0.8s ease;
+    }
+
+    .fade-in.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .staggered {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 0.8s ease, transform 0.8s ease;
+    }
+
+    .staggered.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .gradient-icon {
+      background: linear-gradient(45deg, var(--primary), var(--secondary));
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+
     nav {
       position: fixed;
       top: 0;
       left: 0;
       width: 100%;
       z-index: 100;
-      background-color: white;
-      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+      transition: background-color 0.3s ease;
+    }
+
+    nav.scrolled {
+      /* Only apply glassmorphism, no text color changes */
+    }
+
+    .photo-modal {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-color: rgba(0, 0, 0, 0.5);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 1000;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.3s ease;
+    }
+
+    .photo-modal.active {
+      opacity: 1;
+      pointer-events: all;
+    }
+
+    .photo-content {
+      transform: scale(0.9);
+      transition: transform 0.3s ease;
+    }
+
+    .photo-modal.active .photo-content {
+      transform: scale(1);
     }
 
     .nav-logo-text {
-      color: #333333 !important;
+      color: #1f2937 !important;
     }
 
     .nav-icon {
-      color: var(--primary) !important;
+      color: #10b981 !important;
     }
 
     .nav-button {
-      color: #333333 !important;
+      color: #1f2937 !important;
     }
 
-    .nav-button.bg-green-500 {
-      background-color: var(--primary) !important;
+    .nav-button.bg-emerald-600\/90 {
+      background-color: #10b981 !important;
       color: white !important;
     }
 
-    .nav-button.bg-green-500:hover {
-      background-color: var(--primary-dark) !important;
+    .nav-button.bg-emerald-600\/90:hover {
+      background-color: #059669 !important;
     }
 
     .testimonials-container {
@@ -330,10 +410,9 @@
 </head>
 <body class="overflow-x-hidden">
   <!-- Auth Modal -->
-  <div id="auth-modal" class="fixed inset-0 bg-black/50 flex items-center justify-center z-[1000] opacity-0 pointer-events-none transition-opacity duration-300">
-    <div class="w-full max-w-md p-4 transform scale-90 transition-transform duration-300">
-      <!-- Login Modal -->
-      <div id="login-modal" class="bg-white rounded-2xl overflow-hidden" role="dialog" aria-labelledby="modal-login-title">
+  <div id="auth-modal" class="photo-modal">
+    <div class="photo-content w-full max-w-md p-4">
+      <div class="glassmorphism rounded-2xl overflow-hidden">
         <div class="p-8">
           <div class="flex justify-between items-center mb-6">
             <h1 id="modal-login-title" class="text-2xl font-bold text-gray-800">Welcome Back</h1>
@@ -373,7 +452,7 @@
             </div>
             <button 
               id="login-submit"
-              class="w-full flat-btn"
+              class="w-full glow-btn px-6 py-3 bg-gradient-to-r from-green-500 to-green-600 text-white rounded-lg font-medium transition-all hover:scale-[1.02]"
             >
               Log In
             </button>
@@ -385,7 +464,7 @@
         </div>
       </div>
       <!-- Signup Modal -->
-      <div id="signup-modal" class="bg-white rounded-2xl overflow-hidden hidden" role="dialog" aria-labelledby="modal-signup-title">
+      <div id="signup-modal" class="bg-white rounded-2xl overflow-hidden hidden">
         <div class="p-8">
           <div class="flex justify-between items-center mb-6">
             <h1 id="modal-signup-title" class="text-2xl font-bold text-gray-800">Join GreenPledge</h1>
@@ -448,7 +527,7 @@
             </div>
             <button 
               id="signup-submit"
-              class="w-full flat-btn"
+              class="w-full glow-btn px-6 py-3 bg-gradient-to-r from-green-500 to-green-600 text-white rounded-lg font-medium transition-all hover:scale-[1.02]"
             >
               Create Account
             </button>
@@ -463,9 +542,9 @@
   </div>
 
   <!-- Photo Upload Modal -->
-  <div id="photo-upload-modal" class="fixed inset-0 bg-black/50 flex items-center justify-center z-[1000] opacity-0 pointer-events-none transition-opacity duration-300">
-    <div class="w-full max-w-md p-4 transform scale-90 transition-transform duration-300">
-      <div class="bg-white rounded-2xl overflow-hidden" role="dialog" aria-labelledby="photo-upload-title">
+  <div id="photo-upload-modal" class="photo-modal">
+    <div class="photo-content w-full max-w-md p-4">
+      <div class="glassmorphism rounded-2xl overflow-hidden">
         <div class="p-8">
           <div class="flex justify-between items-center mb-6">
             <h1 id="photo-upload-title" class="text-2xl font-bold text-gray-800">Upload Proof</h1>
@@ -489,13 +568,13 @@
             <div class="flex space-x-4">
               <button 
                 id="submit-photo"
-                class="w-full flat-btn"
+                class="w-full glow-btn px-6 py-3 bg-gradient-to-r from-green-500 to-green-600 text-white rounded-lg font-medium transition-all hover:scale-[1.02]"
               >
                 Submit Proof
               </button>
               <button 
                 id="cancel-photo"
-                class="w-full flat-btn-secondary"
+                class="w-full glow-btn px-6 py-2 border border-gray-300 text-gray-600 rounded-lg hover:bg-gray-50 transition"
               >
                 Cancel
               </button>
@@ -509,69 +588,69 @@
   <!-- Navigation -->
   <nav class="fixed top-0 left-0 w-full z-[100]" aria-label="Main navigation">
     <div class="max-w-7xl mx-auto px-6">
-      <div class="flex items-center justify-between h-16">
+      <div class="flex items-center justify-between h-20">
         <div class="flex items-center">
-          <i class="fas fa-leaf text-xl text-green-500 mr-2 nav-icon"></i>
-          <span class="text-lg font-bold text-gray-800 nav-logo-text">GreenPledge</span>
+          <i class="fas fa-leaf text-2xl text-emerald-300 mr-2 nav-icon"></i>
+          <span class="text-xl font-bold nav-logo-text">GreenPledge</span>
         </div>
 
-        <button id="mobile-menu-toggle" class="md:hidden text-gray-800 nav-button">
-          <i class="fas fa-bars text-xl"></i>
+        <button id="mobile-menu-toggle" class="md:hidden nav-button">
+          <i class="fas fa-bars text-2xl"></i>
         </button>
 
-        <div class="hidden md:flex items-center space-x-6">
-          <a href="#" class="text-gray-800 hover:text-green-500 transition-colors nav-link" data-target="hero">Home</a>
-          <a href="#" class="text-gray-800 hover:text-green-500 transition-colors nav-link" data-target="challenges-section">Challenges</a>
-          <a href="#" class="text-gray-800 hover:text-green-500 transition-colors nav-link" data-target="facts-section">Facts</a>
-          <a href="#" class="text-gray-800 hover:text-green-500 transition-colors nav-link" data-target="community-section">Community</a>
-          <a href="#" class="text-gray-800 hover:text-green-500 transition-colors nav-link" data-target="rewards-section">Rewards</a>
-          <a href="#" class="text-gray-800 hover:text-green-500 transition-colors nav-link">About</a>
+        <div class="hidden md:flex items-center space-x-8">
+          <a href="#" class="hover:text-emerald-300 transition-colors nav-link" data-target="hero">Home</a>
+          <a href="#" class="hover:text-emerald-300 transition-colors nav-link" data-target="challenges-section">Challenges</a>
+          <a href="#" class="hover:text-emerald-300 transition-colors nav-link" data-target="facts-section">Facts</a>
+          <a href="#" class="hover:text-emerald-300 transition-colors nav-link" data-target="community-section">Community</a>
+          <a href="#" class="hover:text-emerald-300 transition-colors nav-link" data-target="rewards-section">Rewards</a>
+          <a href="#" class="hover:text-emerald-300 transition-colors nav-link">About</a>
         </div>
 
         <div class="hidden md:flex items-center space-x-3">
-          <div id="user-stats" class="hidden text-gray-800 text-sm mr-3">
+          <div id="user-stats" class="hidden text-sm mr-3">
             <span id="nav-user-name"></span>
           </div>
-          <button id="login-button" class="flat-btn text-sm">
+          <button id="login-button" class="glow-btn px-5 py-2 bg-emerald-600/90 text-white rounded-full font-medium hover:bg-emerald-700 transition nav-button">
             Sign In
           </button>
-          <button id="signup-button" class="hidden flat-btn text-sm">
+          <button id="signup-button" class="hidden glow-btn px-5 py-2 bg-emerald-600/90 text-white rounded-full font-medium hover:bg-emerald-700 transition nav-button">
             Sign Up
           </button>
-          <button id="profile-button" class="hidden flat-btn text-sm">
+          <button id="profile-button" class="hidden glow-btn px-5 py-2 bg-emerald-600/90 text-white rounded-full font-medium hover:bg-emerald-700 transition nav-button">
             Profile
           </button>
-          <button id="logout-button" class="hidden flat-btn-secondary text-sm">
+          <button id="logout-button" class="hidden glow-btn px-5 py-2 bg-emerald-600/90 text-white rounded-full font-medium hover:bg-emerald-700 transition nav-button">
             Logout
           </button>
         </div>
       </div>
 
       <!-- Mobile Menu -->
-      <div id="mobile-menu" class="md:hidden fixed top-0 right-0 h-full w-64 bg-white p-6 transform translate-x-full transition-transform duration-300">
-        <button id="mobile-menu-close" class="text-gray-800 mb-6 nav-button">
-          <i class="fas fa-times text-xl"></i>
+      <div id="mobile-menu" class="md:hidden fixed top-0 right-0 h-full w-64 glassmorphism p-6 transform translate-x-full transition-transform duration-300">
+        <button id="mobile-menu-close" class="mb-6 nav-button">
+          <i class="fas fa-times text-2xl"></i>
         </button>
         <div class="flex flex-col space-y-4">
-          <a href="#" class="text-gray-800 hover:text-green-500 transition-colors nav-link" data-target="hero">Home</a>
-          <a href="#" class="text-gray-800 hover:text-green-500 transition-colors nav-link" data-target="challenges-section">Challenges</a>
-          <a href="#" class="text-gray-800 hover:text-green-500 transition-colors nav-link" data-target="facts-section">Facts</a>
-          <a href="#" class="text-gray-800 hover:text-green-500 transition-colors nav-link" data-target="community-section">Community</a>
-          <a href="#" class="text-gray-800 hover:text-green-500 transition-colors nav-link" data-target="rewards-section">Rewards</a>
-          <a href="#" class="text-gray-800 hover:text-green-500 transition-colors nav-link">About</a>
-          <div id="mobile-user-stats" class="hidden text-gray-800 text-sm mb-2">
+          <a href="#" class="hover:text-emerald-300 transition-colors nav-link" data-target="hero">Home</a>
+          <a href="#" class="hover:text-emerald-300 transition-colors nav-link" data-target="challenges-section">Challenges</a>
+          <a href="#" class="hover:text-emerald-300 transition-colors nav-link" data-target="facts-section">Facts</a>
+          <a href="#" class="hover:text-emerald-300 transition-colors nav-link" data-target="community-section">Community</a>
+          <a href="#" class="hover:text-emerald-300 transition-colors nav-link" data-target="rewards-section">Rewards</a>
+          <a href="#" class="hover:text-emerald-300 transition-colors nav-link">About</a>
+          <div id="mobile-user-stats" class="hidden text-sm mb-2">
             <span id="mobile-nav-user-name" class="block mb-1"></span>
           </div>
-          <button id="mobile-login-button" class="flat-btn text-sm">
+          <button id="mobile-login-button" class="glow-btn px-5 py-2 bg-emerald-600/90 text-white rounded-full font-medium hover:bg-emerald-700 transition nav-button">
             Sign In
           </button>
-          <button id="mobile-signup-button" class="hidden flat-btn text-sm">
+          <button id="mobile-signup-button" class="hidden glow-btn px-5 py-2 bg-emerald-600/90 text-white rounded-full font-medium hover:bg-emerald-700 transition nav-button">
             Sign Up
           </button>
-          <button id="mobile-profile-button" class="hidden flat-btn text-sm">
+          <button id="mobile-profile-button" class="hidden glow-btn px-5 py-2 bg-emerald-600/90 text-white rounded-full font-medium hover:bg-emerald-700 transition nav-button">
             Profile
           </button>
-          <button id="mobile-logout-button" class="hidden flat-btn-secondary text-sm">
+          <button id="mobile-logout-button" class="hidden glow-btn px-5 py-2 bg-emerald-600/90 text-white rounded-full font-medium hover:bg-emerald-700 transition nav-button">
             Logout
           </button>
         </div>
@@ -582,36 +661,36 @@
   <!-- Hero Section -->
   <section class="hero-section" id="hero">
     <div class="max-w-7xl mx-auto px-6 flex flex-col justify-center min-h-[80vh] text-center">
-      <h1 class="text-5xl md:text-6xl font-bold mb-6 leading-tight">
+      <h1 class="text-5xl md:text-6xl font-bold mb-6 leading-tight fade-in">
         Small <span class="text-green-500">Actions</span>,<br>
         Big <span class="text-green-500">Impact</span>
       </h1>
-      <p class="text-lg md:text-xl text-gray-600 max-w-3xl mx-auto mb-10 leading-relaxed">
+      <p class="text-lg md:text-xl text-gray-600 max-w-3xl mx-auto mb-10 leading-relaxed fade-in">
         Transform your daily habits with micro-actions that create macro impact for our planet
       </p>
-      <div class="flex flex-col sm:flex-row justify-center gap-4">
-        <button id="cta-signup" class="flat-btn">
+      <div class="flex flex-col sm:flex-row justify-center gap-4 fade-in">
+        <button id="cta-signup" class="glow-btn px-6 py-3 bg-gradient-to-r from-green-500 to-green-600 text-white rounded-lg font-medium transition-all hover:scale-[1.02]">
           Start Your Journey
         </button>
-        <button class="flat-btn-secondary">
+        <button class="glow-btn px-6 py-2 border border-gray-300 text-gray-600 rounded-lg hover:bg-gray-50 transition">
           Learn More
         </button>
       </div>
       <div class="mt-12 grid grid-cols-2 md:grid-cols-4 gap-6">
-        <div class="card text-center">
-          <div class="text-2xl font-bold text-gray-800">37+</div>
+        <div class="glassmorphism card-3d rounded-xl p-6 staggered">
+          <div class="text-2xl font-bold">37+</div>
           <div class="text-sm text-gray-600">Community Members</div>
         </div>
-        <div class="card text-center">
-          <div class="text-2xl font-bold text-gray-800">63+</div>
+        <div class="glassmorphism card-3d rounded-xl p-6 staggered" style="transition-delay: 0.2s;">
+          <div class="text-2xl font-bold">63+</div>
           <div class="text-sm text-gray-600">Challenges Completed</div>
         </div>
-        <div class="card text-center">
-          <div class="text-2xl font-bold text-gray-800">0,3+</div>
+        <div class="glassmorphism card-3d rounded-xl p-6 staggered" style="transition-delay: 0.4s;">
+          <div class="text-2xl font-bold">0,3+</div>
           <div class="text-sm text-gray-600">Tons of CO₂ Reduced</div>
         </div>
-        <div class="card text-center">
-          <div class="text-2xl font-bold text-gray-800">17+</div>
+        <div class="glassmorphism card-3d rounded-xl p-6 staggered" style="transition-delay: 0.6s;">
+          <div class="text-2xl font-bold">17+</div>
           <div class="text-sm text-gray-600">Trees Protected</div>
         </div>
       </div>
@@ -620,41 +699,45 @@
 
   <!-- Daily Challenge Section -->
   <section id="challenges-section" class="max-w-4xl mx-auto mb-20 py-20">
-    <div class="card">
-      <div class="flex flex-col md:flex-row items-start">
-        <div class="md:w-1/2 mb-8 md:mb-0 md:pr-8">
-          <h2 class="text-2xl font-bold text-gray-800 mb-4">Today's Featured Challenge</h2>
-          <p class="text-gray-600 mb-6" id="featured-challenge">
-            Loading today's challenge...
-          </p>
-          <div class="flex space-x-4">
-            <button id="try-challenge-button" class="flat-btn">
-              I Did This!
-            </button>
-            <button id="save-challenge-button" class="flat-btn-secondary">
-              Save Challenge
-            </button>
-          </div>
-          <div id="challenge-completed" class="hidden flex items-center mt-4 text-green-600">
-            <i class="fas fa-trophy mr-2"></i> Challenge Completed!
-          </div>
-          <div class="mt-4 flex space-x-4">
-            <a href="https://twitter.com/intent/tweet?text=I just completed a challenge on GreenPledge! 🌱 Join me: yourwebsite.com" target="_blank" class="social-icon text-gray-600">
-              <i class="fab fa-twitter"></i>
-            </a>
-            <a href="https://www.facebook.com/sharer/sharer.php?u=yourwebsite.com" target="_blank" class="social-icon text-gray-600">
-              <i class="fab fa-facebook-f"></i>
-            </a>
-          </div>
-        </div>
-        <div class="md:w-1/2">
-          <div class="bg-green-50 rounded-xl p-6">
-            <h3 class="font-semibold text-green-800 mb-3 flex items-center">
-              <i class="fas fa-lightbulb mr-2 text-green-500"></i> Why This Matters
-            </h3>
-            <p class="text-green-700 mb-4" id="challenge-impact-text">
-              Loading impact information...
+    <div class="glassmorphism card-3d rounded-2xl overflow-hidden fade-in">
+      <div class="p-6">
+        <div class="flex flex-col md:flex-row items-start">
+          <div class="md:w-1/2 mb-8 md:mb-0 md:pr-8">
+            <h2 class="text-2xl font-bold text-gray-800 mb-4">
+              <i class="fas fa-bullseye mr-2 text-amber-600 gradient-icon"></i> Today's Featured Challenge
+            </h2>
+            <p class="text-gray-600 mb-6" id="featured-challenge">
+              Loading today's challenge...
             </p>
+            <div class="flex space-x-4">
+              <button id="try-challenge-button" class="glow-btn px-6 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition">
+                I Did This!
+              </button>
+              <button id="save-challenge-button" class="glow-btn px-6 py-2 border border-green-600 text-green-600 rounded-lg hover:bg-green-50 transition">
+                Save Challenge
+              </button>
+            </div>
+            <div id="challenge-completed" class="hidden flex items-center mt-4 text-green-600">
+              <i class="fas fa-trophy mr-2"></i> Challenge Completed!
+            </div>
+            <div class="mt-4 flex space-x-4">
+              <a href="https://twitter.com/intent/tweet?text=I just completed a challenge on GreenPledge! 🌱 Join me: yourwebsite.com" target="_blank" class="social-icon text-gray-600">
+                <i class="fab fa-twitter"></i>
+              </a>
+              <a href="https://www.facebook.com/sharer/sharer.php?u=yourwebsite.com" target="_blank" class="social-icon text-gray-600">
+                <i class="fab fa-facebook-f"></i>
+              </a>
+            </div>
+          </div>
+          <div class="md:w-1/2">
+            <div class="bg-green-50 rounded-xl p-6">
+              <h3 class="font-semibold text-green-800 mb-3 flex items-center">
+                <i class="fas fa-lightbulb mr-2 gradient-icon"></i> Why This Matters
+              </h3>
+              <p class="text-green-700 mb-4" id="challenge-impact-text">
+                Loading impact information...
+              </p>
+            </div>
           </div>
         </div>
       </div>
@@ -663,11 +746,11 @@
 
   <!-- Eco Facts Section -->
   <section id="facts-section" class="max-w-7xl mx-auto mb-20 py-20">
-    <h2 class="text-4xl font-bold text-center text-gray-800 mb-12">Discover Eco Facts</h2>
+    <h2 class="text-4xl font-bold text-center text-gray-800 mb-12 fade-in">Discover Eco Facts</h2>
     <div class="grid md:grid-cols-3 gap-8">
-      <div class="card">
+      <div class="glassmorphism card-3d rounded-xl p-6 fade-in">
         <div class="w-16 h-16 rounded-full bg-green-100 flex items-center justify-center text-green-600 mb-6">
-          <i class="fas fa-recycle text-2xl"></i>
+          <i class="fas fa-recycle text-2xl gradient-icon"></i>
         </div>
         <h3 class="text-xl font-bold text-gray-800 mb-3">Recycling Revolution</h3>
         <p class="text-gray-600 mb-6">
@@ -677,9 +760,9 @@
           Learn More <i class="fas fa-arrow-right ml-2"></i>
         </button>
       </div>
-      <div class="card">
+      <div class="glassmorphism card-3d rounded-xl p-6 fade-in">
         <div class="w-16 h-16 rounded-full bg-blue-100 flex items-center justify-center text-blue-600 mb-6">
-          <i class="fas fa-tint text-2xl"></i>
+          <i class="fas fa-tint text-2xl gradient-icon"></i>
         </div>
         <h3 class="text-xl font-bold text-gray-800 mb-3">Water Wisdom</h3>
         <p class="text-gray-600 mb-6">
@@ -689,9 +772,9 @@
           Learn More <i class="fas fa-arrow-right ml-2"></i>
         </button>
       </div>
-      <div class="card">
+      <div class="glassmorphism card-3d rounded-xl p-6 fade-in">
         <div class="w-16 h-16 rounded-full bg-amber-100 flex items-center justify-center text-amber-600 mb-6">
-          <i class="fas fa-bolt text-2xl"></i>
+          <i class="fas fa-bolt text-2xl gradient-icon"></i>
         </div>
         <h3 class="text-xl font-bold text-gray-800 mb-3">Energy Efficiency</h3>
         <p class="text-gray-600 mb-6">
@@ -706,13 +789,13 @@
 
   <!-- Community Testimonials Section -->
   <section id="community-section" class="max-w-7xl mx-auto mb-20 py-20">
-    <h2 class="text-4xl font-bold text-center text-gray-800 mb-12">What Our Community Says</h2>
+    <h2 class="text-4xl font-bold text-center text-gray-800 mb-12 fade-in">What Our Community Says</h2>
     <div class="relative">
       <button id="scroll-left" class="scroll-btn absolute left-0 top-1/2 transform -translate-y-1/2 z-10">
         <i class="fas fa-chevron-left"></i>
       </button>
       <div id="testimonials-container" class="testimonials-container">
-        <div class="testimonial-card card">
+        <div class="testimonial-card glassmorphism card-3d rounded-xl p-6">
           <p class="text-gray-600 italic mb-6">"This website helped me reduce my water usage by 30%! The daily challenges make sustainability so easy."</p>
           <div class="flex items-center">
             <div class="w-10 h-10 rounded-full bg-green-600 flex items-center justify-center text-white font-bold mr-3">A</div>
@@ -722,7 +805,7 @@
             </div>
           </div>
         </div>
-        <div class="testimonial-card card">
+        <div class="testimonial-card glassmorphism card-3d rounded-xl p-6">
           <p class="text-gray-600 italic mb-6">"I never knew small changes could make such a difference. GreenPledge opened my eyes to eco-friendly living!"</p>
           <div class="flex items-center">
             <div class="w-10 h-10 rounded-full bg-amber-500 flex items-center justify-center text-white font-bold mr-3">S</div>
@@ -732,7 +815,7 @@
             </div>
           </div>
         </div>
-        <div class="testimonial-card card">
+        <div class="testimonial-card glassmorphism card-3d rounded-xl p-6">
           <p class="text-gray-600 italic mb-6">"The community challenges are so motivating. I've saved 100kg of CO₂ thanks to GreenPledge!"</p>
           <div class="flex items-center">
             <div class="w-10 h-10 rounded-full bg-blue-500 flex items-center justify-center text-white font-bold mr-3">M</div>
@@ -742,7 +825,7 @@
             </div>
           </div>
         </div>
-        <div class="testimonial-card card">
+        <div class="testimonial-card glassmorphism card-3d rounded-xl p-6">
           <p class="text-gray-600 italic mb-6">"GreenPledge made me rethink my daily habits. Now I’m more conscious about my carbon footprint!"</p>
           <div class="flex items-center">
             <div class="w-10 h-10 rounded-full bg-purple-500 flex items-center justify-center text-white font-bold mr-3">K</div>
@@ -752,7 +835,7 @@
             </div>
           </div>
         </div>
-        <div class="testimonial-card card">
+        <div class="testimonial-card glassmorphism card-3d rounded-xl p-6">
           <p class="text-gray-600 italic mb-6">"Thanks to GreenPledge, I’ve cut down on single-use plastics and feel great about my impact!"</p>
           <div class="flex items-center">
             <div class="w-10 h-10 rounded-full bg-red-500 flex items-center justify-center text-white font-bold mr-3">J</div>
@@ -762,7 +845,7 @@
             </div>
           </div>
         </div>
-        <div class="testimonial-card card">
+        <div class="testimonial-card glassmorphism card-3d rounded-xl p-6">
           <p class="text-gray-600 italic mb-6">"The tips and challenges are practical and fun. I’ve learned so much about sustainability!"</p>
           <div class="flex items-center">
             <div class="w-10 h-10 rounded-full bg-teal-500 flex items-center justify-center text-white font-bold mr-3">Z</div>
@@ -781,68 +864,70 @@
 
   <!-- Rewards Section -->
   <section id="rewards-section" class="max-w-4xl mx-auto mb-20 py-20">
-    <div class="card">
-      <h2 class="text-4xl font-bold text-center text-gray-800 mb-6">Reward Shop</h2>
-      <div class="flex flex-col sm:flex-row justify-between items-center mb-6 gap-4">
-        <h3 class="text-xl font-semibold text-gray-800">Your XP: <span id="user-xp">0</span></h3>
-        <button id="refresh-xp" class="flat-btn px-4 py-2">
-          <i class="fas fa-sync-alt mr-2"></i> Refresh XP
-        </button>
-      </div>
-      <div class="rewards-table-container">
-        <table>
-          <thead>
-            <tr>
-              <th>Reward</th>
-              <th>Points Required</th>
-              <th>Description</th>
-              <th>Action</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td data-label="Reward">Digital Certificate</td>
-              <td data-label="Points Required">50 points</td>
-              <td data-label="Description">Personalized certificate of eco-achievement (PDF format).</td>
-              <td data-label="Action">
-                <button class="redeem-btn" data-points="50" data-reward="Digital Certificate">Redeem</button>
-              </td>
-            </tr>
-            <tr>
-              <td data-label="Reward">Reusable Cloth Bag</td>
-              <td data-label="Points Required">100 points</td>
-              <td data-label="Description">Eco-friendly bag with GreenPledge logo, ideal for shopping.</td>
-              <td data-label="Action">
-                <button class="redeem-btn" data-points="100" data-reward="Reusable Cloth Bag">Redeem</button>
-              </td>
-            </tr>
-            <tr>
-              <td data-label="Reward">GreenPledge Badge (Physical)</td>
-              <td data-label="Points Required">300 points</td>
-              <td data-label="Description">A collectible badge mailed to you to show off your commitment.</td>
-              <td data-label="Action">
-                <button class="redeem-btn" data-points="300" data-reward="GreenPledge Badge">Redeem</button>
-              </td>
-            </tr>
-            <tr>
-              <td data-label="Reward">T-shirt (GreenPledge Edition)</td>
-              <td data-label="Points Required">400 points</td>
-              <td data-label="Description">A stylish, organic cotton T-shirt with our message and logo.</td>
-              <td data-label="Action">
-                <button class="redeem-btn" data-points="400" data-reward="T-shirt (GreenPledge Edition)">Redeem</button>
-              </td>
-            </tr>
-          </tbody>
-        </table>
+    <div class="glassmorphism card-3d rounded-2xl overflow-hidden fade-in">
+      <div class="p-6">
+        <h2 class="text-4xl font-bold text-center text-gray-800 mb-6">Reward Shop</h2>
+        <div class="flex flex-col sm:flex-row justify-between items-center mb-6 gap-4">
+          <h3 class="text-xl font-semibold text-gray-800">Your XP: <span id="user-xp">0</span></h3>
+          <button id="refresh-xp" class="glow-btn px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition">
+            <i class="fas fa-sync-alt mr-2"></i> Refresh XP
+          </button>
+        </div>
+        <div class="rewards-table-container">
+          <table>
+            <thead>
+              <tr>
+                <th>Reward</th>
+                <th>Points Required</th>
+                <th>Description</th>
+                <th>Action</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td data-label="Reward">Digital Certificate</td>
+                <td data-label="Points Required">50 points</td>
+                <td data-label="Description">Personalized certificate of eco-achievement (PDF format).</td>
+                <td data-label="Action">
+                  <button class="redeem-btn" data-points="50" data-reward="Digital Certificate">Redeem</button>
+                </td>
+              </tr>
+              <tr>
+                <td data-label="Reward">Reusable Cloth Bag</td>
+                <td data-label="Points Required">100 points</td>
+                <td data-label="Description">Eco-friendly bag with GreenPledge logo, ideal for shopping.</td>
+                <td data-label="Action">
+                  <button class="redeem-btn" data-points="100" data-reward="Reusable Cloth Bag">Redeem</button>
+                </td>
+              </tr>
+              <tr>
+                <td data-label="Reward">GreenPledge Badge (Physical)</td>
+                <td data-label="Points Required">300 points</td>
+                <td data-label="Description">A collectible badge mailed to you to show off your commitment.</td>
+                <td data-label="Action">
+                  <button class="redeem-btn" data-points="300" data-reward="GreenPledge Badge">Redeem</button>
+                </td>
+              </tr>
+              <tr>
+                <td data-label="Reward">T-shirt (GreenPledge Edition)</td>
+                <td data-label="Points Required">400 points</td>
+                <td data-label="Description">A stylish, organic cotton T-shirt with our message and logo.</td>
+                <td data-label="Action">
+                  <button class="redeem-btn" data-points="400" data-reward="T-shirt (GreenPledge Edition)">Redeem</button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
       </div>
     </div>
   </section>
 
   <!-- Footer -->
-  <footer class="bg-white py-12 border-t border-gray-200">
+  <footer class="bg-white/80 py-12 border-t border-gray-200">
     <div class="max-w-7xl mx-auto px-6">
       <div class="grid md:grid-cols-5 gap-8 mb-8">
-        <div>
+        <div class="fade-in">
           <h3 class="text-lg font-bold text-gray-800 mb-4">GreenPledge</h3>
           <p class="text-gray-600 mb-4">Making sustainability simple, one day at a time.</p>
           <div class="flex space-x-4">
@@ -851,7 +936,7 @@
             <a href="#" class="social-icon text-gray-600"><i class="fab fa-facebook-f"></i></a>
           </div>
         </div>
-        <div>
+        <div class="fade-in">
           <h3 class="text-lg font-bold text-gray-800 mb-4">Resources</h3>
           <ul class="space-y-2">
             <li><a href="#" class="text-gray-600 hover:text-green-600">Eco Tips</a></li>
@@ -860,7 +945,7 @@
             <li><a href="#" class="text-gray-600 hover:text-green-600">Educational Materials</a></li>
           </ul>
         </div>
-        <div>
+        <div class="fade-in">
           <h3 class="text-lg font-bold text-gray-800 mb-4">About</h3>
           <ul class="space-y-2">
             <li><a href="#" class="text-gray-600 hover:text-green-600">Our Mission</a></li>
@@ -869,7 +954,7 @@
             <li><a href="#" class="text-gray-600 hover:text-green-600">Press</a></li>
           </ul>
         </div>
-        <div>
+        <div class="fade-in">
           <h3 class="text-lg font-bold text-gray-800 mb-4">Get Updates</h3>
           <p class="text-gray-600 mb-4">Join our newsletter for weekly eco-tips</p>
           <div class="flex">
@@ -879,7 +964,7 @@
             </button>
           </div>
         </div>
-        <div>
+        <div class="fade-in">
           <h3 class="text-lg font-bold text-gray-800 mb-4">Feedback</h3>
           <div id="feedback-form" class="space-y-4">
             <textarea id="feedback-text" class="w-full px-4 py-2 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-green-500" placeholder="Share your thoughts..."></textarea>
@@ -1006,6 +1091,33 @@
       setupEventListeners();
       updateTestimonialsScroll();
       populateEcoWarriors();
+      updateNavBackground();
+      setupScrollAnimations();
+    }
+
+    // Update navigation background on scroll
+    function updateNavBackground() {
+      window.addEventListener('scroll', () => {
+        if (window.scrollY > 50) {
+          nav.classList.add('glassmorphism', 'scrolled');
+        } else {
+          nav.classList.remove('glassmorphism', 'scrolled');
+        }
+      });
+    }
+
+    // Scroll animations
+    function setupScrollAnimations() {
+      const elements = document.querySelectorAll('.fade-in, .staggered');
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+          }
+        });
+      }, { threshold: 0.2 });
+
+      elements.forEach(element => observer.observe(element));
     }
 
     // Update XP display
@@ -1107,16 +1219,14 @@
 
     // Show photo upload modal
     function showPhotoUploadModal() {
-      photoUploadModal.classList.remove('opacity-0', 'pointer-events-none');
-      photoUploadModal.classList.add('opacity-100', 'pointer-events-auto');
+      photoUploadModal.classList.add('active');
       trapFocus(photoUploadModal);
       challengePhotoInput.focus();
     }
 
     // Close photo upload modal
     function closePhotoUploadModalHandler() {
-      photoUploadModal.classList.remove('opacity-100', 'pointer-events-auto');
-      photoUploadModal.classList.add('opacity-0', 'pointer-events-none');
+      photoUploadModal.classList.remove('active');
       photoPreviewContainer.classList.add('hidden');
       photoPreview.src = '';
       challengePhotoInput.value = '';
@@ -1195,7 +1305,7 @@
       warriors.forEach((warrior, index) => {
         const place = index === 0 ? '🥇 1st Place' : index === 1 ? '🥈 2nd Place' : '🥉 3rd Place';
         const warriorEl = document.createElement('div');
-        warriorEl.className = 'card text-center';
+        warriorEl.className = 'glassmorphism card-3d rounded-xl p-6 text-center';
         warriorEl.innerHTML = `
           <h3 class="text-xl font-bold text-gray-800 mb-2">${place}</h3>
           <p class="text-gray-600">
@@ -1236,7 +1346,7 @@
         if (e.key === 'Escape' && authModal.classList.contains('active')) {
           closeModal();
         }
-        if (e.key === 'Escape' && photoUploadModal.classList.contains('opacity-100')) {
+        if (e.key === 'Escape' && photoUploadModal.classList.contains('active')) {
           closePhotoUploadModalHandler();
         }
       });
@@ -1396,8 +1506,7 @@
 
     // Show login modal
     function showLoginModal() {
-      authModal.classList.remove('opacity-0', 'pointer-events-none');
-      authModal.classList.add('opacity-100', 'pointer-events-auto', 'active');
+      authModal.classList.add('active');
       loginModal.classList.remove('hidden');
       signupModal.classList.add('hidden');
       trapFocus(loginModal);
@@ -1406,8 +1515,7 @@
 
     // Show signup modal
     function showSignupModal() {
-      authModal.classList.remove('opacity-0', 'pointer-events-none');
-      authModal.classList.add('opacity-100', 'pointer-events-auto', 'active');
+      authModal.classList.add('active');
       signupModal.classList.remove('hidden');
       loginModal.classList.add('hidden');
       trapFocus(signupModal);
@@ -1416,8 +1524,7 @@
 
     // Close modal
     function closeModal() {
-      authModal.classList.remove('opacity-100', 'pointer-events-auto', 'active');
-      authModal.classList.add('opacity-0', 'pointer-events-none');
+      authModal.classList.remove('active');
     }
 
     // Handle modal login
