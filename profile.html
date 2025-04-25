@@ -55,7 +55,7 @@
     .nav-link {
       position: relative;
       transition: color 0.3s ease;
-      color: #1f2937 !important; /* Black text at all times */
+      color: #1f2937 !important;
     }
 
     .nav-link::after {
@@ -74,7 +74,7 @@
     }
 
     .nav-link:hover {
-      color: #10b981 !important; /* Hover color remains green */
+      color: #10b981 !important;
     }
 
     .glow-btn {
@@ -176,29 +176,27 @@
       transform: scale(1);
     }
 
-    /* Nav Styles */
     .nav-logo-text {
-      color: #1f2937 !important; /* Black logo text at all times */
+      color: #1f2937 !important;
     }
 
     .nav-icon {
-      color: #10b981 !important; /* Keep icon color primary green */
+      color: #10b981 !important;
     }
 
     .nav-button {
-      color: #1f2937 !important; /* Black button text at all times */
+      color: #1f2937 !important;
     }
 
     .nav-button.bg-emerald-600\/90 {
-      background-color: #10b981 !important; /* Green background for contrast */
-      color: white !important; /* White text on green button */
+      background-color: #10b981 !important;
+      color: white !important;
     }
 
     .nav-button.bg-emerald-600\/90:hover {
-      background-color: #059669 !important; /* Darker green on hover */
+      background-color: #059669 !important;
     }
 
-    /* Glassmorphism on scroll, but no text color change */
     nav.scrolled {
       /* Only apply glassmorphism, no text color changes */
     }
@@ -212,6 +210,58 @@
   </style>
 </head>
 <body class="overflow-x-hidden">
+  <!-- Edit Profile Modal -->
+  <div id="edit-profile-modal" class="photo-modal">
+    <div class="photo-content w-full max-w-md p-4">
+      <div class="glassmorphism rounded-2xl overflow-hidden">
+        <div class="p-8">
+          <div class="flex justify-between items-center mb-6">
+            <h1 class="text-2xl font-bold text-gray-800">Edit Profile</h1>
+            <button id="close-edit-modal" class="text-gray-500 hover:text-gray-700 transition-colors">
+              <i class="fas fa-times text-xl"></i>
+            </button>
+          </div>
+          <div class="space-y-4">
+            <div>
+              <label for="edit-name" class="block text-sm font-medium text-gray-700 mb-1">Full Name</label>
+              <input 
+                type="text" 
+                id="edit-name" 
+                required
+                class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent"
+                placeholder="Your Name"
+              >
+            </div>
+            <div>
+              <label for="edit-email" class="block text-sm font-medium text-gray-700 mb-1">Email</label>
+              <input 
+                type="email" 
+                id="edit-email" 
+                required
+                class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent"
+                placeholder="your@email.com"
+              >
+            </div>
+            <div class="flex space-x-4">
+              <button 
+                id="save-profile" 
+                class="w-full glow-btn px-6 py-3 bg-gradient-to-r from-green-500 to-green-600 text-white rounded-lg font-medium transition-all hover:scale-[1.02]"
+              >
+                Save Changes
+              </button>
+              <button 
+                id="cancel-edit" 
+                class="w-full glow-btn px-6 py-2 border border-gray-300 text-gray-600 rounded-lg hover:bg-gray-50 transition"
+              >
+                Cancel
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <!-- Photo Upload Modal -->
   <div id="photo-modal" class="photo-modal">
     <div class="photo-content w-full max-w-md p-4">
@@ -263,11 +313,11 @@
         </button>
 
         <div class="hidden md:flex items-center space-x-8">
-          <a href="index.html" class="text-white/90 hover:text-emerald-300 transition-colors nav-link" data-target="hero">Home</a>
+          <a href="index.html#hero" class="text-white/90 hover:text-emerald-300 transition-colors nav-link" data-target="hero">Home</a>
           <a href="index.html#challenges-section" class="text-white/90 hover:text-emerald-300 transition-colors nav-link" data-target="challenges-section">Challenges</a>
           <a href="index.html#facts-section" class="text-white/90 hover:text-emerald-300 transition-colors nav-link" data-target="facts-section">Facts</a>
           <a href="index.html#community-section" class="text-white/90 hover:text-emerald-300 transition-colors nav-link" data-target="community-section">Community</a>
-          <a href="#" class="text-white/90 hover:text-emerald-300 transition-colors nav-link" id="reward-shop-link">Reward Shop</a>
+          <a href="index.html#rewards-section" class="text-white/90 hover:text-emerald-300 transition-colors nav-link" data-target="rewards-section">Rewards</a>
           <a href="#" class="text-white/90 hover:text-emerald-300 transition-colors nav-link">About</a>
         </div>
 
@@ -287,11 +337,11 @@
           <i class="fas fa-times text-2xl"></i>
         </button>
         <div class="flex flex-col space-y-4">
-          <a href="index.html" class="text-white/90 hover:text-emerald-300 transition-colors nav-link" data-target="hero">Home</a>
+          <a href="index.html#hero" class="text-white/90 hover:text-emerald-300 transition-colors nav-link" data-target="hero">Home</a>
           <a href="index.html#challenges-section" class="text-white/90 hover:text-emerald-300 transition-colors nav-link" data-target="challenges-section">Challenges</a>
           <a href="index.html#facts-section" class="text-white/90 hover:text-emerald-300 transition-colors nav-link" data-target="facts-section">Facts</a>
           <a href="index.html#community-section" class="text-white/90 hover:text-emerald-300 transition-colors nav-link" data-target="community-section">Community</a>
-          <a href="#" class="text-white/90 hover:text-emerald-300 transition-colors nav-link" id="mobile-reward-shop-link">Reward Shop</a>
+          <a href="index.html#rewards-section" class="text-white/90 hover:text-emerald-300 transition-colors nav-link" data-target="rewards-section">Rewards</a>
           <a href="#" class="text-white/90 hover:text-emerald-300 transition-colors nav-link">About</a>
           <div id="mobile-user-stats" class="hidden text-white text-sm mb-2">
             <span id="mobile-nav-user-name" class="block mb-1"></span>
@@ -323,11 +373,8 @@
         </div>
         
         <div class="flex flex-col space-y-2 mt-4 md:mt-0">
-          <button class="glow-btn px-6 py-2 border border-green-500 text-green-600 rounded-lg hover:bg-green-50 transition">
+          <button id="edit-profile" class="glow-btn px-6 py-2 border border-green-500 text-green-600 rounded-lg hover:bg-green-50 transition">
             Edit Profile
-          </button>
-          <button id="redeem-xp" class="glow-btn px-6 py-2 bg-amber-500 text-white rounded-lg hover:bg-amber-600 transition">
-            Redeem XP
           </button>
         </div>
       </div>
@@ -451,7 +498,7 @@
         
         <!-- Comment Form (Initially Hidden) -->
         <div id="comment-form-container" class="hidden mb-6">
-          <form id="comment-form" class="space-y-4">
+          <div id="comment-form" class="space-y-4">
             <div>
               <textarea 
                 id="comment-text" 
@@ -463,46 +510,25 @@
             </div>
             <div class="flex space-x-4">
               <button 
-                type="submit"
+                id="submit-comment"
                 class="glow-btn px-6 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition"
               >
                 <i class="fas fa-paper-plane mr-2"></i> Post Comment
               </button>
               <button 
-                type="button"
                 id="cancel-comment"
                 class="glow-btn px-6 py-2 border border-gray-300 text-gray-600 rounded-lg hover:bg-gray-50 transition"
               >
                 Cancel
               </button>
             </div>
-          </form>
+          </div>
         </div>
         
         <!-- Comments List -->
         <div id="comments-list" class="space-y-4">
           <div class="text-center py-8 text-gray-500" id="no-comments-message">
             You haven't posted any comments yet. Click "Add Comment" to share your thoughts!
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- Redeemed Rewards Section -->
-    <div class="glassmorphism card-3d rounded-2xl overflow-hidden mb-8 fade-in">
-      <div class="p-6">
-        <div class="flex justify-between items-center mb-6">
-          <h2 class="text-xl font-bold text-gray-800">
-            <i class="fas fa-gift mr-2 text-purple-600 gradient-icon"></i> Redeemed Rewards
-          </h2>
-          <button id="visit-reward-shop" class="glow-btn px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition">
-            <i class="fas fa-shopping-bag mr-2"></i> Visit Reward Shop
-          </button>
-        </div>
-        
-        <div id="redeemed-rewards-list" class="space-y-4">
-          <div class="text-center py-8 text-gray-500" id="no-rewards-message">
-            You haven't redeemed any rewards yet. Visit the Reward Shop to exchange your XP for eco-friendly items!
           </div>
         </div>
       </div>
@@ -589,8 +615,7 @@
       completedChallenges: 0,
       xp: 0,
       memberSince: new Date().getFullYear(),
-      currentChallengeIndex: null,
-      redeemedRewards: []
+      currentChallengeIndex: null
     };
 
     // DOM Elements
@@ -615,10 +640,17 @@
     const challengesCompleted = document.getElementById('challenges-completed');
     const co2Reduced = document.getElementById('co2-reduced');
     const xpEarned = document.getElementById('xp-earned');
-    const redeemXPBtn = document.getElementById('redeem-xp');
+    const editProfileBtn = document.getElementById('edit-profile');
+    const editProfileModal = document.getElementById('edit-profile-modal');
+    const closeEditModal = document.getElementById('close-edit-modal');
+    const cancelEditBtn = document.getElementById('cancel-edit');
+    const saveProfileBtn = document.getElementById('save-profile');
+    const editNameInput = document.getElementById('edit-name');
+    const editEmailInput = document.getElementById('edit-email');
     const newCommentBtn = document.getElementById('new-comment-btn');
     const commentFormContainer = document.getElementById('comment-form-container');
     const commentForm = document.getElementById('comment-form');
+    const submitCommentBtn = document.getElementById('submit-comment');
     const cancelComment = document.getElementById('cancel-comment');
     const commentsList = document.getElementById('comments-list');
     const noCommentsMessage = document.getElementById('no-comments-message');
@@ -629,23 +661,8 @@
     const photoPreview = document.getElementById('photo-preview');
     const previewImage = document.getElementById('preview-image');
     const confirmPhoto = document.getElementById('confirm-photo');
-    const rewardShopLink = document.getElementById('reward-shop-link');
-    const mobileRewardShopLink = document.getElementById('mobile-reward-shop-link');
-    const redeemedRewardsList = document.getElementById('redeemed-rewards-list');
-    const noRewardsMessage = document.getElementById('no-rewards-message');
-    const visitRewardShopBtn = document.getElementById('visit-reward-shop');
     const navUserName = document.getElementById('nav-user-name');
     const mobileNavUserName = document.getElementById('mobile-nav-user-name');
-
-    // Data Management for Redeemed Rewards (should be in dataManager.js)
-    function saveRedeemedRewards(rewards) {
-      localStorage.setItem('redeemedRewards', JSON.stringify(rewards));
-    }
-
-    function getRedeemedRewards() {
-      const data = localStorage.getItem('redeemedRewards');
-      return data ? JSON.parse(data) : [];
-    }
 
     // Initialize the app
     function initApp() {
@@ -657,13 +674,11 @@
 
       state.currentUser = loggedInUser;
 
-      // Update user object with badge if not present
       if (!state.currentUser.badge) {
         state.currentUser.badge = state.xp >= 100 ? "topWarrior" : "none";
         saveUser(state.currentUser);
       }
 
-      // Load saved data
       state.savedChallenges = getSavedChallenges();
       renderSavedChallenges();
 
@@ -674,12 +689,6 @@
 
       state.completedChallenges = getCompletedChallenges();
       state.xp = getXP();
-
-      // Load redeemed rewards
-      state.redeemedRewards = getRedeemedRewards().filter(
-        reward => reward.user === state.currentUser.name
-      );
-      renderRedeemedRewards();
 
       updateProfileInfo();
       displayUserNameWithBadge();
@@ -732,7 +741,6 @@
           mobileBadgeImg.className = 'badge-icon';
           mobileNavUserName.appendChild(mobileBadgeImg);
         }
-        // Show user stats
         document.getElementById('user-stats').classList.remove('hidden');
         document.getElementById('mobile-user-stats').classList.remove('hidden');
       }
@@ -773,28 +781,19 @@
       saveChallengeBtn.addEventListener('click', saveChallenge);
       newDailyChallengeBtn.addEventListener('click', generateDailyChallenge);
       
+      editProfileBtn.addEventListener('click', showEditProfileModal);
+      closeEditModal.addEventListener('click', closeEditProfileModal);
+      cancelEditBtn.addEventListener('click', closeEditProfileModal);
+      saveProfileBtn.addEventListener('click', saveProfileChanges);
+      editProfileModal.addEventListener('click', (e) => {
+        if (e.target === editProfileModal) {
+          closeEditProfileModal();
+        }
+      });
+
       newCommentBtn.addEventListener('click', showCommentForm);
       cancelComment.addEventListener('click', hideCommentForm);
-      commentForm.addEventListener('submit', handleCommentSubmit);
-
-      redeemXPBtn.addEventListener('click', () => {
-        window.open('rewards.html', '_blank');
-      });
-
-      rewardShopLink.addEventListener('click', (e) => {
-        e.preventDefault();
-        window.open('rewards.html', '_blank');
-      });
-
-      mobileRewardShopLink.addEventListener('click', (e) => {
-        e.preventDefault();
-        window.open('rewards.html', '_blank');
-        mobileMenu.classList.add('translate-x-full');
-      });
-
-      visitRewardShopBtn.addEventListener('click', () => {
-        window.open('rewards.html', '_blank');
-      });
+      submitCommentBtn.addEventListener('click', handleCommentSubmit);
 
       closePhotoModal.addEventListener('click', closePhotoModalFn);
       photoModal.addEventListener('click', (e) => {
@@ -808,13 +807,8 @@
       document.querySelectorAll('.nav-link').forEach(link => {
         link.addEventListener('click', function(e) {
           const targetId = this.getAttribute('data-target');
-          if (!targetId) return; // Skip Reward Shop link
           e.preventDefault();
-          if (targetId === 'hero') {
-            window.location.href = 'index.html';
-          } else {
-            window.location.href = `index.html#${targetId}`;
-          }
+          window.location.href = `index.html#${targetId}`;
           mobileMenu.classList.add('translate-x-full');
         });
       });
@@ -828,10 +822,47 @@
       window.location.href = 'index.html';
     }
 
+    // Show edit profile modal
+    function showEditProfileModal() {
+      editNameInput.value = state.currentUser.name;
+      editEmailInput.value = state.currentUser.email;
+      editProfileModal.classList.add('active');
+    }
+
+    // Close edit profile modal
+    function closeEditProfileModal() {
+      editProfileModal.classList.remove('active');
+      editNameInput.value = '';
+      editEmailInput.value = '';
+    }
+
+    // Save profile changes
+    function saveProfileChanges() {
+      const newName = editNameInput.value.trim();
+      const newEmail = editEmailInput.value.trim();
+
+      if (!newName || newName.length < 2) {
+        alert('Please enter a valid name (at least 2 characters).');
+        return;
+      }
+      if (!newEmail || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(newEmail)) {
+        alert('Please enter a valid email address.');
+        return;
+      }
+
+      state.currentUser.name = newName;
+      state.currentUser.email = newEmail;
+      saveUser(state.currentUser);
+      updateProfileInfo();
+      displayUserNameWithBadge();
+      closeEditProfileModal();
+      alert('Profile updated successfully! 🌱');
+    }
+
     // Show photo upload modal
     function showPhotoModal() {
       photoModal.classList.add('active');
-      photoUpload.value = '';
+     我校:photoUpload.value = '';
       photoPreview.classList.add('hidden');
       confirmPhoto.disabled = true;
     }
@@ -879,7 +910,6 @@
       const file = photoUpload.files[0];
       const reader = new FileReader();
       reader.onload = () => {
-        // Store photo in localStorage
         const photos = getPhotos();
         photos.push({
           challenge: dailyChallengeText.textContent,
@@ -889,13 +919,11 @@
         });
         savePhotos(photos);
 
-        // Update challenge and XP
         state.completedChallenges++;
         state.xp += 10;
         saveCompletedChallenges(state.completedChallenges);
         saveXP(state.xp);
         
-        // Update badge status
         state.currentUser.badge = state.xp >= 100 ? "topWarrior" : "none";
         saveUser(state.currentUser);
         displayUserNameWithBadge();
@@ -972,13 +1000,16 @@
     function hideCommentForm() {
       commentFormContainer.classList.add('hidden');
       newCommentBtn.classList.remove('hidden');
-      commentForm.reset();
+      document.getElementById('comment-text').value = '';
     }
 
     // Handle comment submission
     function handleCommentSubmit(e) {
-      e.preventDefault();
       const commentText = document.getElementById('comment-text').value;
+      if (!commentText.trim()) {
+        alert('Please enter a comment.');
+        return;
+      }
       const timestamp = new Date().toLocaleString();
       
       const newComment = {
@@ -1037,36 +1068,6 @@
           saveComments(state.comments);
           renderComments();
         });
-      });
-    }
-
-    // Render redeemed rewards
-    function renderRedeemedRewards() {
-      if (state.redeemedRewards.length === 0) {
-        noRewardsMessage.classList.remove('hidden');
-        redeemedRewardsList.innerHTML = '';
-        return;
-      }
-      
-      noRewardsMessage.classList.add('hidden');
-      redeemedRewardsList.innerHTML = '';
-      
-      state.redeemedRewards.forEach((reward, index) => {
-        const rewardEl = document.createElement('div');
-        rewardEl.className = 'bg-white rounded-lg p-4 flex justify-between items-center';
-        rewardEl.innerHTML = `
-          <div class="flex items-center">
-            <div class="w-8 h-8 rounded-full bg-purple-100 flex items-center justify-center text-purple-600 mr-4">
-              <i class="fas fa-gift"></i>
-            </div>
-            <div>
-              <p class="text-gray-700 font-semibold">${reward.reward}</p>
-              <p class="text-sm text-gray-500">Redeemed on ${reward.date}</p>
-            </div>
-          </div>
-        `;
-        
-        redeemedRewardsList.appendChild(rewardEl);
       });
     }
 
