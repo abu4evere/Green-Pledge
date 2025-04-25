@@ -22,22 +22,18 @@
     gtag('js', new Date());
     gtag('config', 'YOUR_GA_ID');
   </script>
- 
   <script defer src="https://cdn.tailwindcss.com?plugins=forms,typography,aspect-ratio,line-clamp"></script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css">
   <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/dompurify/2.4.1/purify.min.js"></script>
   <style>
-    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&family=Playfair+Display:wght@400;700&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap');
 
     :root {
-      --primary: #10b981;
-      --primary-dark: #059669;
-      --secondary: #f59e0b;
-      --accent: #34d399;
-      --background: #f0fdf4;
-      --text: #1f2937;
+      --primary: #4CAF50;
+      --primary-dark: #388E3C;
+      --text: #333333;
+      --background: #E8F5E9;
     }
 
     html {
@@ -46,7 +42,7 @@
 
     body {
       font-family: 'Poppins', sans-serif;
-      background: linear-gradient(135deg, #f0fdf4 0%, #ecfdf5 100%);
+      background-color: var(--background);
       min-height: 100vh;
       margin: 0;
       overflow-x: hidden;
@@ -54,107 +50,59 @@
     }
 
     h1, h2, h3, h4, h5, h6 {
-      font-family: 'Playfair Display', serif;
-    }
-
-    .glassmorphism {
-      background: rgba(255, 255, 255, 0.1);
-      backdrop-filter: blur(15px);
-      -webkit-backdrop-filter: blur(15px);
-      border: 1px solid rgba(255, 255, 255, 0.2);
-      box-shadow: 0 8px 32px rgba(31, 38, 135, 0.1);
-    }
-
-    @supports not (backdrop-filter: blur(15px)) {
-      .glassmorphism {
-        background: rgba(255, 255, 255, 0.3);
-      }
-    }
-
-    .card-3d {
-      transition: transform 0.5s ease, box-shadow 0.5s ease;
-      transform: perspective(1000px) rotateX(0deg) rotateY(0deg);
-    }
-
-    .card-3d:hover {
-      transform: perspective(1000px) rotateX(5deg) rotateY(-5deg);
-      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+      font-family: 'Poppins', sans-serif;
+      font-weight: 700;
     }
 
     .nav-link {
       position: relative;
       transition: color 0.3s ease;
-      color: #1f2937 !important;
-    }
-
-    .nav-link::after {
-      content: '';
-      position: absolute;
-      bottom: -4px;
-      left: 0;
-      width: 0;
-      height: 2px;
-      background: linear-gradient(90deg, var(--primary), var(--secondary));
-      transition: width 0.3s ease;
+      color: #333333 !important;
     }
 
     .nav-link:hover {
-      color: #10b981 !important;
-    }
-
-    .nav-link:hover::after {
-      width: 100%;
+      color: var(--primary) !important;
     }
 
     .hero-section {
       position: relative;
-      min-height: 100vh;
+      min-height: 80vh;
       padding-top: 80px;
-      overflow: hidden;
+      text-align: center;
     }
 
-    .hero-background {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      z-index: -1;
-      background: no-repeat center center;
-      background-size: cover;
-      transform: scale(1.1);
-      transition: transform 0.1s ease;
+    .flat-btn {
+      background-color: var(--primary);
+      color: white;
+      padding: 12px 24px;
+      border-radius: 50px;
+      font-weight: 500;
+      transition: background-color 0.3s ease;
     }
 
-    .hero-overlay {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: linear-gradient(to bottom, rgba(0, 128, 0, 0.3), rgba(0, 139, 139, 0.7));
+    .flat-btn:hover {
+      background-color: var(--primary-dark);
     }
 
-    .glow-btn {
-      position: relative;
-      overflow: hidden;
-      z-index: 1;
+    .flat-btn-secondary {
+      background-color: white;
+      color: var(--primary);
+      border: 2px solid var(--primary);
+      padding: 10px 22px;
+      border-radius: 50px;
+      font-weight: 500;
+      transition: background-color 0.3s ease;
     }
 
-    .glow-btn::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: -100%;
-      width: 100%;
-      height: 100%;
-      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
-      transition: left 0.5s ease;
-      z-index: -1;
+    .flat-btn-secondary:hover {
+      background-color: #f0f0f0;
     }
 
-    .glow-btn:hover::before {
-      left: 100%;
+    .card {
+      background-color: white;
+      border-radius: 16px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+      padding: 24px;
     }
 
     .progress-bar {
@@ -170,92 +118,35 @@
       color: var(--primary);
     }
 
-    .wave-footer {
-      position: relative;
-      overflow: hidden;
-    }
-
-    .wave-footer::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 320'%3E%3Cpath fill='%23f0fdf4' fill-opacity='1' d='M0,160L48,176C96,192,192,224,288,213.3C384,203,480,149,576,138.7C672,128,768,160,864,181.3C960,203,1056,213,1152,197.3C1248,181,1344,139,1392,117.3L1440,96L1440,0L1392,0C1344,0,1248,0,1152,0C1056,0,960,0,864,0C768,0,672,0,576,0C480,0,384,0,288,0C192,0,96,0,48,0L0,0Z'%3E%3C/path%3E%3C/svg%3E") no-repeat bottom;
-      background-size: cover;
-      z-index: -1;
-    }
-
-    .fade-in {
-      opacity: 0;
-      transform: translateY(20px);
-      transition: opacity 0.8s ease, transform 0.8s ease;
-    }
-
-    .fade-in.visible {
-      opacity: 1;
-      transform: translateY(0);
-    }
-
-    .staggered {
-      opacity: 0;
-      transform: translateY(30px);
-      transition: opacity 0.8s ease, transform 0.8s ease;
-    }
-
-    .staggered.visible {
-      opacity: 1;
-      transform: translateY(0);
-    }
-
-    .avatar-zoom {
-      transition: transform 0.3s ease;
-    }
-
-    .avatar-zoom:hover {
-      transform: scale(1.1);
-    }
-
-    .gradient-icon {
-      background: linear-gradient(45deg, var(--primary), var(--secondary));
-      -webkit-background-clip: text;
-      background-clip: text;
-      color: transparent;
-    }
-
     nav {
       position: fixed;
       top: 0;
       left: 0;
       width: 100%;
       z-index: 100;
-      transition: background-color 0.3s ease;
+      background-color: white;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
     }
 
     .nav-logo-text {
-      color: #1f2937 !important;
+      color: #333333 !important;
     }
 
     .nav-icon {
-      color: #10b981 !important;
+      color: var(--primary) !important;
     }
 
     .nav-button {
-      color: #1f2937 !important;
+      color: #333333 !important;
     }
 
-    .nav-button.bg-emerald-600\/90 {
-      background-color: #10b981 !important;
+    .nav-button.bg-green-500 {
+      background-color: var(--primary) !important;
       color: white !important;
     }
 
-    .nav-button.bg-emerald-600\/90:hover {
-      background-color: #059669 !important;
-    }
-
-    nav.scrolled {
-      /* Glassmorphism applied on scroll */
+    .nav-button.bg-green-500:hover {
+      background-color: var(--primary-dark) !important;
     }
 
     .testimonials-container {
@@ -278,7 +169,7 @@
     }
 
     .scroll-btn {
-      background-color: #10b981;
+      background-color: var(--primary);
       color: white;
       border-radius: 50%;
       width: 40px;
@@ -286,12 +177,11 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      transition: background-color 0.3s ease, transform 0.3s ease;
+      transition: background-color 0.3s ease;
     }
 
     .scroll-btn:hover {
-      background-color: #059669;
-      transform: scale(1.1);
+      background-color: var(--primary-dark);
     }
 
     .scroll-btn.disabled {
@@ -325,7 +215,7 @@
   <div id="auth-modal" class="fixed inset-0 bg-black/50 flex items-center justify-center z-[1000] opacity-0 pointer-events-none transition-opacity duration-300">
     <div class="w-full max-w-md p-4 transform scale-90 transition-transform duration-300">
       <!-- Login Modal -->
-      <div id="login-modal" class="glassmorphism rounded-2xl overflow-hidden" role="dialog" aria-labelledby="modal-login-title">
+      <div id="login-modal" class="bg-white rounded-2xl overflow-hidden" role="dialog" aria-labelledby="modal-login-title">
         <div class="p-8">
           <div class="flex justify-between items-center mb-6">
             <h1 id="modal-login-title" class="text-2xl font-bold text-gray-800">Welcome Back</h1>
@@ -365,7 +255,7 @@
             </div>
             <button 
               id="login-submit"
-              class="w-full glow-btn px-6 py-3 bg-gradient-to-r from-green-500 to-green-600 text-white rounded-lg font-medium transition-all hover:scale-[1.02] mt-6"
+              class="w-full flat-btn"
             >
               Log In
             </button>
@@ -377,7 +267,7 @@
         </div>
       </div>
       <!-- Signup Modal -->
-      <div id="signup-modal" class="glassmorphism rounded-2xl overflow-hidden hidden" role="dialog" aria-labelledby="modal-signup-title">
+      <div id="signup-modal" class="bg-white rounded-2xl overflow-hidden hidden" role="dialog" aria-labelledby="modal-signup-title">
         <div class="p-8">
           <div class="flex justify-between items-center mb-6">
             <h1 id="modal-signup-title" class="text-2xl font-bold text-gray-800">Join GreenPledge</h1>
@@ -440,7 +330,7 @@
             </div>
             <button 
               id="signup-submit"
-              class="w-full glow-btn px-6 py-3 bg-gradient-to-r from-green-500 to-green-600 text-white rounded-lg font-medium transition-all hover:scale-[1.02] mt-6"
+              class="w-full flat-btn"
             >
               Create Account
             </button>
@@ -457,7 +347,7 @@
   <!-- Photo Upload Modal -->
   <div id="photo-upload-modal" class="fixed inset-0 bg-black/50 flex items-center justify-center z-[1000] opacity-0 pointer-events-none transition-opacity duration-300">
     <div class="w-full max-w-md p-4 transform scale-90 transition-transform duration-300">
-      <div class="glassmorphism rounded-2xl overflow-hidden" role="dialog" aria-labelledby="photo-upload-title">
+      <div class="bg-white rounded-2xl overflow-hidden" role="dialog" aria-labelledby="photo-upload-title">
         <div class="p-8">
           <div class="flex justify-between items-center mb-6">
             <h1 id="photo-upload-title" class="text-2xl font-bold text-gray-800">Upload Proof</h1>
@@ -481,13 +371,13 @@
             <div class="flex space-x-4">
               <button 
                 id="submit-photo"
-                class="w-full glow-btn px-6 py-3 bg-gradient-to-r from-green-500 to-green-600 text-white rounded-lg font-medium transition-all hover:scale-[1.02]"
+                class="w-full flat-btn"
               >
                 Submit Proof
               </button>
               <button 
                 id="cancel-photo"
-                class="w-full glow-btn px-6 py-3 border border-gray-300 text-gray-600 rounded-lg hover:bg-gray-50 transition"
+                class="w-full flat-btn-secondary"
               >
                 Cancel
               </button>
@@ -499,66 +389,68 @@
   </div>
 
   <!-- Navigation -->
-  <nav class="fixed top-0 left-0 w-full z-[100] transition-all duration-300" aria-label="Main navigation">
+  <nav class="fixed top-0 left-0 w-full z-[100]" aria-label="Main navigation">
     <div class="max-w-7xl mx-auto px-6">
-      <div class="flex items-center justify-between h-20">
+      <div class="flex items-center justify-between h-16">
         <div class="flex items-center">
-          <i class="fas fa-leaf text-2xl text-emerald-300 mr-2 nav-icon"></i>
-          <span class="text-xl font-bold text-white nav-logo-text">GreenPledge</span>
+          <i class="fas fa-leaf text-xl text-green-500 mr-2 nav-icon"></i>
+          <span class="text-lg font-bold text-gray-800 nav-logo-text">GreenPledge</span>
         </div>
 
-        <button id="mobile-menu-toggle" class="md:hidden text-white nav-button">
-          <i class="fas fa-bars text-2xl"></i>
+        <button id="mobile-menu-toggle" class="md:hidden text-gray-800 nav-button">
+          <i class="fas fa-bars text-xl"></i>
         </button>
 
-        <div class="hidden md:flex items-center space-x-8">
-          <a href="#" class="text-white/90 hover:text-emerald-300 transition-colors nav-link" data-target="hero">Home</a>
-          <a href="#" class="text-white/90 hover:text-emerald-300 transition-colors nav-link" data-target="challenges-section">Challenges</a>
-          <a href="#" class="text-white/90 hover:text-emerald-300 transition-colors nav-link" data-target="facts-section">Facts</a>
-          <a href="#" class="text-white/90 hover:text-emerald-300 transition-colors nav-link" data-target="community-section">Community</a>
-          <a href="#" class="text-white/90 hover:text-emerald-300 transition-colors nav-link" id="reward-shop-link">Reward Shop</a>
-          <a href="#" class="text-white/90 hover:text-emerald-300 transition-colors nav-link">About</a>
+        <div class="hidden md:flex items-center space-x-6">
+          <a href="#" class="text-gray-800 hover:text-green-500 transition-colors nav-link" data-target="hero">Home</a>
+          <a href="#" class="text-gray-800 hover:text-green-500 transition-colors nav-link" data-target="challenges-section">Challenges</a>
+          <a href="#" class="text-gray-800 hover:text-green-500 transition-colors nav-link" data-target="community-section">Community</a>
+          <a href="#" class="text-gray-800 hover:text-green-500 transition-colors nav-link">About</a>
         </div>
 
         <div class="hidden md:flex items-center space-x-3">
           <div id="user-stats" class="hidden text-gray-800 text-sm mr-3">
             <span id="nav-user-name"></span>
           </div>
-          <button id="login-button" class="px-5 py-2 text-emerald-300 hover:text-white border border-emerald-300/50 rounded-full font-medium hover:bg-emerald-600/30 transition nav-button">
+          <button id="login-button" class="flat-btn text-sm">
             Sign In
           </button>
-          <button id="signup-button" class="px-5 py-2 bg-emerald-600/90 text-white rounded-full font-medium hover:bg-emerald-700 transition nav-button">
+          <button id="signup-button" class="hidden flat-btn text-sm">
             Sign Up
           </button>
-          <button id="profile-button" class="hidden px-5 py-2 bg-emerald-600/90 text-white rounded-full font-medium hover:bg-emerald-700 transition nav-button">
+          <button id="profile-button" class="hidden flat-btn text-sm">
             Profile
+          </button>
+          <button id="logout-button" class="hidden flat-btn-secondary text-sm">
+            Logout
           </button>
         </div>
       </div>
 
       <!-- Mobile Menu -->
-      <div id="mobile-menu" class="md:hidden fixed top-0 right-0 h-full w-64 glassmorphism p-6 transform translate-x-full transition-transform duration-300">
-        <button id="mobile-menu-close" class="text-white mb-6 nav-button">
-          <i class="fas fa-times text-2xl"></i>
+      <div id="mobile-menu" class="md:hidden fixed top-0 right-0 h-full w-64 bg-white p-6 transform translate-x-full transition-transform duration-300">
+        <button id="mobile-menu-close" class="text-gray-800 mb-6 nav-button">
+          <i class="fas fa-times text-xl"></i>
         </button>
         <div class="flex flex-col space-y-4">
-          <a href="#" class="text-white/90 hover:text-emerald-300 transition-colors nav-link" data-target="hero">Home</a>
-          <a href="#" class="text-white/90 hover:text-emerald-300 transition-colors nav-link" data-target="challenges-section">Challenges</a>
-          <a href="#" class="text-white/90 hover:text-emerald-300 transition-colors nav-link" data-target="facts-section">Facts</a>
-          <a href="#" class="text-white/90 hover:text-emerald-300 transition-colors nav-link" data-target="community-section">Community</a>
-          <a href="#" class="text-white/90 hover:text-emerald-300 transition-colors nav-link" id="mobile-reward-shop-link">Reward Shop</a>
-          <a href="#" class="text-white/90 hover:text-emerald-300 transition-colors nav-link">About</a>
+          <a href="#" class="text-gray-800 hover:text-green-500 transition-colors nav-link" data-target="hero">Home</a>
+          <a href="#" class="text-gray-800 hover:text-green-500 transition-colors nav-link" data-target="challenges-section">Challenges</a>
+          <a href="#" class="text-gray-800 hover:text-green-500 transition-colors nav-link" data-target="community-section">Community</a>
+          <a href="#" class="text-gray-800 hover:text-green-500 transition-colors nav-link">About</a>
           <div id="mobile-user-stats" class="hidden text-gray-800 text-sm mb-2">
             <span id="mobile-nav-user-name" class="block mb-1"></span>
           </div>
-          <button id="mobile-login-button" class="px-5 py-2 text-emerald-300 hover:text-white border border-emerald-300/50 rounded-full font-medium hover:bg-emerald-600/30 transition nav-button">
+          <button id="mobile-login-button" class="flat-btn text-sm">
             Sign In
           </button>
-          <button id="mobile-signup-button" class="px-5 py-2 bg-emerald-600/90 text-white rounded-full font-medium hover:bg-emerald-700 transition nav-button">
+          <button id="mobile-signup-button" class="hidden flat-btn text-sm">
             Sign Up
           </button>
-          <button id="mobile-profile-button" class="hidden px-5 py-2 bg-emerald-600/90 text-white rounded-full font-medium hover:bg-emerald-700 transition nav-button">
+          <button id="mobile-profile-button" class="hidden flat-btn text-sm">
             Profile
+          </button>
+          <button id="mobile-logout-button" class="hidden flat-btn-secondary text-sm">
+            Logout
           </button>
         </div>
       </div>
@@ -567,84 +459,156 @@
 
   <!-- Hero Section -->
   <section class="hero-section" id="hero">
-    <div class="hero-background" id="hero-bg"></div>
-    <div class="hero-overlay"></div>
-
-    <!-- Hero Content -->
-    <div class="relative z-10 max-w-7xl mx-auto px-6 flex flex-col justify-center min-h-screen pt-24 pb-32 text-center">
-      <h1 class="text-5xl md:text-7xl lg:text-8xl font-bold mb-6 leading-tight animate__animated animate__fadeInDown">
-        <span class="text-white drop-shadow-lg">
-          Small <span class="text-emerald-300">Actions</span>,
-        </span><br>
-        <span class="text-white drop-shadow-lg">
-          Big <span class="text-emerald-300">Impact</span>
-        </span>
+    <div class="max-w-7xl mx-auto px-6 flex flex-col justify-center min-h-[80vh] text-center">
+      <h1 class="text-5xl md:text-6xl font-bold mb-6 leading-tight">
+        Small <span class="text-green-500">Actions</span>,<br>
+        Big <span class="text-green-500">Impact</span>
       </h1>
-      <p class="text-xl md:text-2xl text-white/90 max-w-3xl mx-auto mb-10 leading-relaxed animate__animated animate__fadeInUp animate__delay-1s">
+      <p class="text-lg md:text-xl text-gray-600 max-w-3xl mx-auto mb-10 leading-relaxed">
         Transform your daily habits with micro-actions that create macro impact for our planet
       </p>
       <div class="flex flex-col sm:flex-row justify-center gap-4">
-        <button id="cta-signup" class="glow-btn px-8 py-4 bg-gradient-to-r from-emerald-500 to-green-600 text-white font-bold rounded-full shadow-xl hover:shadow-2xl transition-all hover:scale-105 transform animate__animated animate__fadeInUp animate__delay-2s">
+        <button id="cta-signup" class="flat-btn">
           Start Your Journey
         </button>
-        <button class="glow-btn px-8 py-4 bg-white/10 backdrop-blur-lg text-white border border-white/20 rounded-full font-medium shadow-lg hover:bg-white/20 transition-all hover:scale-105 animate__animated animate__fadeInUp animate__delay-2s">
+        <button class="flat-btn-secondary">
           Learn More
         </button>
       </div>
+      <div class="mt-12 grid grid-cols-2 md:grid-cols-4 gap-6">
+        <div class="card text-center">
+          <div class="text-2xl font-bold text-gray-800">10,248+</div>
+          <div class="text-sm text-gray-600">Community Members</div>
+        </div>
+        <div class="card text-center">
+          <div class="text-2xl font-bold text-gray-800">382,741+</div>
+          <div class="text-sm text-gray-600">Challenges Completed</div>
+        </div>
+        <div class="card text-center">
+          <div class="text-2xl font-bold text-gray-800">1,842+</div>
+          <div class="text-sm text-gray-600">Tons of CO₂ Reduced</div>
+        </div>
+        <div class="card text-center">
+          <div class="text-2xl font-bold text-gray-800">92,417+</div>
+          <div class="text-sm text-gray-600">Trees Protected</div>
+        </div>
+      </div>
+    </div>
+  </section>
 
-      <!-- Animated Scroll Indicator -->
-      <div class="absolute bottom-10 left-1/2 transform -translate-x-1/2 z-20">
-        <a href="#challenges-section" class="animate-bounce inline-flex items-center justify-center w-12 h-12 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 hover:bg-white/20 transition-colors">
-          <i class="fas fa-chevron-down text-white text-xl"></i>
-        </a>
+  <!-- Profile Section (Hidden by Default) -->
+  <section id="profile-section" class="max-w-7xl mx-auto mb-20 py-20 hidden">
+    <div class="flex flex-col md:flex-row gap-6">
+      <div class="card w-full md:w-1/3">
+        <div class="flex items-center mb-4">
+          <div class="w-12 h-12 rounded-full bg-gray-200 flex items-center justify-center text-gray-800 font-bold mr-4">
+            <i class="fas fa-user text-xl"></i>
+          </div>
+          <div>
+            <h3 id="profile-name" class="text-xl font-bold text-gray-800"></h3>
+            <p id="profile-email" class="text-sm text-gray-600"></p>
+            <p id="profile-join-date" class="text-sm text-green-600"></p>
+          </div>
+        </div>
+        <button id="edit-profile-button" class="flat-btn-secondary w-full mt-4">
+          Edit Profile
+        </button>
+      </div>
+      <div class="w-full md:w-2/3 space-y-6">
+        <div class="grid grid-cols-1 sm:grid-cols-3 gap-6">
+          <div class="card text-center">
+            <div class="text-lg font-semibold text-gray-800 mb-2">Days Active</div>
+            <div id="profile-days-active" class="text-2xl font-bold text-gray-800">0</div>
+          </div>
+          <div class="card text-center">
+            <div class="text-lg font-semibold text-gray-800 mb-2">Challenges Completed</div>
+            <div id="profile-challenges-completed" class="text-2xl font-bold text-gray-800">0</div>
+          </div>
+          <div class="card text-center">
+            <div class="text-lg font-semibold text-gray-800 mb-2">CO₂ Reduced</div>
+            <div id="profile-co2-reduced" class="text-2xl font-bold text-gray-800">0 kg</div>
+          </div>
+        </div>
+        <div class="card">
+          <h3 class="text-lg font-semibold text-gray-800 mb-4">Saved Challenges</h3>
+          <div id="saved-challenges-list" class="text-gray-600">
+            You haven't saved any challenges yet. Click "New Challenge" to get started!
+          </div>
+        </div>
+        <div class="card">
+          <div class="flex justify-between items-center mb-4">
+            <h3 class="text-lg font-semibold text-gray-800">Today's Challenge</h3>
+            <button id="new-challenge-button" class="flat-btn text-sm">
+              New Challenge
+            </button>
+          </div>
+          <p id="profile-today-challenge" class="text-gray-600 mb-4">Loading today's challenge...</p>
+          <div class="flex space-x-4">
+            <button id="profile-try-challenge-button" class="flat-btn">
+              I Did This!
+            </button>
+            <button id="profile-save-challenge-button" class="flat-btn-secondary">
+              Save for Later
+            </button>
+          </div>
+          <div id="profile-challenge-completed" class="hidden flex items-center mt-4 text-green-600">
+            <i class="fas fa-trophy mr-2"></i> Challenge Completed!
+          </div>
+          <div class="mt-4">
+            <h4 class="text-sm font-semibold text-gray-800 flex items-center">
+              <i class="fas fa-lightbulb mr-2 text-green-500"></i> Why This Matters
+            </h4>
+            <p id="profile-challenge-impact-text" class="text-gray-600 text-sm">
+              Every small action contributes to a healthier planet. This challenge helps reduce waste and conserve resources.
+            </p>
+          </div>
+        </div>
       </div>
     </div>
   </section>
 
   <!-- Daily Challenge Section -->
   <section id="challenges-section" class="max-w-4xl mx-auto mb-20 py-20">
-    <div class="glassmorphism card-3d rounded-2xl overflow-hidden fade-in">
-      <div class="p-8 md:p-10">
-        <div class="flex flex-col md:flex-row items-center">
-          <div class="md:w-1/2 mb-8 md:mb-0 md:pr-8">
-            <h2 class="text-3xl font-bold text-gray-800 mb-4">Today's Featured Challenge</h2>
-            <p class="text-gray-600 mb-6" id="featured-challenge">
-              Loading today's challenge...
-            </p>
-            <div class="flex space-x-4">
-              <button id="try-challenge-button" class="glow-btn px-6 py-3 bg-green-600 text-white rounded-lg hover:bg-green-700 transition">
-                <i class="fas fa-check-circle mr-2"></i> Try Challenge
-              </button>
-              <button id="save-challenge-button" class="glow-btn px-6 py-3 border border-green-600 text-green-600 rounded-lg hover:bg-green-50 transition">
-                <i class="fas fa-bookmark mr-2"></i> Save for Later
-              </button>
-            </div>
-            <div id="challenge-completed" class="hidden flex items-center mt-4 text-green-600">
-              <i class="fas fa-trophy mr-2"></i> Challenge Completed!
-            </div>
-            <div class="mt-4 flex space-x-4">
-              <a href="https://twitter.com/intent/tweet?text=I just completed a challenge on GreenPledge! 🌱 Join me: yourwebsite.com" target="_blank" class="social-icon text-gray-600">
-                <i class="fab fa-twitter"></i>
-              </a>
-              <a href="https://www.facebook.com/sharer/sharer.php?u=yourwebsite.com" target="_blank" class="social-icon text-gray-600">
-                <i class="fab fa-facebook-f"></i>
-              </a>
-            </div>
+    <div class="card">
+      <div class="flex flex-col md:flex-row items-start">
+        <div class="md:w-1/2 mb-8 md:mb-0 md:pr-8">
+          <h2 class="text-2xl font-bold text-gray-800 mb-4">Today's Featured Challenge</h2>
+          <p class="text-gray-600 mb-6" id="featured-challenge">
+            Loading today's challenge...
+          </p>
+          <div class="flex space-x-4">
+            <button id="try-challenge-button" class="flat-btn">
+              I Did This!
+            </button>
+            <button id="save-challenge-button" class="flat-btn-secondary">
+              Save Challenge
+            </button>
           </div>
-          <div class="md:w-1/2">
-            <div class="bg-green-50 rounded-xl p-6">
-              <h3 class="font-semibold text-green-800 mb-3 flex items-center">
-                <i class="fas fa-lightbulb mr-2 gradient-icon"></i> Why This Matters
-              </h3>
-              <p class="text-green-700 mb-4" id="challenge-impact-text">
-                Loading impact information...
-              </p>
-              <div class="flex items-center">
-                <div class="w-full bg-gray-200 rounded-full h-2.5 mr-3">
-                  <div id="challenge-progress-bar" class="bg-green-600 h-2.5 rounded-full progress-bar" style="width: 0%"></div>
-                </div>
-                <span id="completion-rate-text" class="text-sm text-gray-600">0% completion rate</span>
+          <div id="challenge-completed" class="hidden flex items-center mt-4 text-green-600">
+            <i class="fas fa-trophy mr-2"></i> Challenge Completed!
+          </div>
+          <div class="mt-4 flex space-x-4">
+            <a href="https://twitter.com/intent/tweet?text=I just completed a challenge on GreenPledge! 🌱 Join me: yourwebsite.com" target="_blank" class="social-icon text-gray-600">
+              <i class="fab fa-twitter"></i>
+            </a>
+            <a href="https://www.facebook.com/sharer/sharer.php?u=yourwebsite.com" target="_blank" class="social-icon text-gray-600">
+              <i class="fab fa-facebook-f"></i>
+            </a>
+          </div>
+        </div>
+        <div class="md:w-1/2">
+          <div class="bg-green-50 rounded-xl p-6">
+            <h3 class="font-semibold text-green-800 mb-3 flex items-center">
+              <i class="fas fa-lightbulb mr-2 text-green-500"></i> Why This Matters
+            </h3>
+            <p class="text-green-700 mb-4" id="challenge-impact-text">
+              Loading impact information...
+            </p>
+            <div class="flex items-center">
+              <div class="w-full bg-gray-200 rounded-full h-2.5 mr-3">
+                <div id="challenge-progress-bar" class="bg-green-600 h-2.5 rounded-full progress-bar" style="width: 0%"></div>
               </div>
+              <span id="completion-rate-text" class="text-sm text-gray-600">0% completion rate</span>
             </div>
           </div>
         </div>
@@ -654,138 +618,109 @@
 
   <!-- Eco Facts Section -->
   <section id="facts-section" class="max-w-7xl mx-auto mb-20 py-20">
-    <h2 class="text-4xl font-bold text-center text-gray-800 mb-12 fade-in">Discover Eco Facts</h2>
+    <h2 class="text-4xl font-bold text-center text-gray-800 mb-12">Discover Eco Facts</h2>
     <div class="grid md:grid-cols-3 gap-8">
-      <div class="glassmorphism card-3d rounded-2xl overflow-hidden transition-all hover:shadow-xl staggered" style="transition-delay: 0.2s;">
-        <div class="p-8">
-          <div class="w-16 h-16 rounded-full bg-green-100 flex items-center justify-center text-green-600 mb-6">
-            <i class="fas fa-recycle text-2xl gradient-icon"></i>
-          </div>
-          <h3 class="text-xl font-bold text-gray-800 mb-3">Recycling Revolution</h3>
-          <p class="text-gray-600 mb-6">
-            Recycling one ton of paper saves 17 trees, 7,000 gallons of water, and 4,000 kilowatt hours of electricity.
-          </p>
-          <button class="text-green-600 font-medium flex items-center hover:scale-105 transition-transform">
-            Learn More <i class="fas fa-arrow-right ml-2"></i>
-          </button>
+      <div class="card">
+        <div class="w-16 h-16 rounded-full bg-green-100 flex items-center justify-center text-green-600 mb-6">
+          <i class="fas fa-recycle text-2xl"></i>
         </div>
+        <h3 class="text-xl font-bold text-gray-800 mb-3">Recycling Revolution</h3>
+        <p class="text-gray-600 mb-6">
+          Recycling one ton of paper saves 17 trees, 7,000 gallons of water, and 4,000 kilowatt hours of electricity.
+        </p>
+        <button class="text-green-600 font-medium flex items-center hover:scale-105 transition-transform">
+          Learn More <i class="fas fa-arrow-right ml-2"></i>
+        </button>
       </div>
-      <div class="glassmorphism card-3d rounded-2xl overflow-hidden transition-all hover:shadow-xl staggered" style="transition-delay: 0.4s;">
-        <div class="p-8">
-          <div class="w-16 h-16 rounded-full bg-blue-100 flex items-center justify-center text-blue-600 mb-6">
-            <i class="fas fa-tint text-2xl gradient-icon"></i>
-          </div>
-          <h3 class="text-xl font-bold text-gray-800 mb-3">Water Wisdom</h3>
-          <p class="text-gray-600 mb-6">
-            Turning off the tap while brushing your teeth can save up to 8 gallons of water per day, that's 200 gallons per month!
-          </p>
-          <button class="text-green-600 font-medium flex items-center hover:scale-105 transition-transform">
-            Learn More <i class="fas fa-arrow-right ml-2"></i>
-          </button>
+      <div class="card">
+        <div class="w-16 h-16 rounded-full bg-blue-100 flex items-center justify-center text-blue-600 mb-6">
+          <i class="fas fa-tint text-2xl"></i>
         </div>
+        <h3 class="text-xl font-bold text-gray-800 mb-3">Water Wisdom</h3>
+        <p class="text-gray-600 mb-6">
+          Turning off the tap while brushing your teeth can save up to 8 gallons of water per day, that's 200 gallons per month!
+        </p>
+        <button class="text-green-600 font-medium flex items-center hover:scale-105 transition-transform">
+          Learn More <i class="fas fa-arrow-right ml-2"></i>
+        </button>
       </div>
-      <div class="glassmorphism card-3d rounded-2xl overflow-hidden transition-all hover:shadow-xl staggered" style="transition-delay: 0.6s;">
-        <div class="p-8">
-          <div class="w-16 h-16 rounded-full bg-amber-100 flex items-center justify-center text-amber-600 mb-6">
-            <i class="fas fa-bolt text-2xl gradient-icon"></i>
-          </div>
-          <h3 class="text-xl font-bold text-gray-800 mb-3">Energy Efficiency</h3>
-          <p class="text-gray-600 mb-6">
-            LED bulbs use 75% less energy and last 25 times longer than incandescent lighting, saving money and resources.
-          </p>
-          <button class="text-green-600 font-medium flex items-center hover:scale-105 transition-transform">
-            Learn More <i class="fas fa-arrow-right ml-2"></i>
-          </button>
+      <div class="card">
+        <div class="w-16 h-16 rounded-full bg-amber-100 flex items-center justify-center text-amber-600 mb-6">
+          <i class="fas fa-bolt text-2xl"></i>
         </div>
+        <h3 class="text-xl font-bold text-gray-800 mb-3">Energy Efficiency</h3>
+        <p class="text-gray-600 mb-6">
+          LED bulbs use 75% less energy and last 25 times longer than incandescent lighting, saving money and resources.
+        </p>
+        <button class="text-green-600 font-medium flex items-center hover:scale-105 transition-transform">
+          Learn More <i class="fas fa-arrow-right ml-2"></i>
+        </button>
       </div>
     </div>
   </section>
 
   <!-- Community Testimonials Section -->
   <section id="community-section" class="max-w-7xl mx-auto mb-20 py-20">
-    <h2 class="text-4xl font-bold text-center text-gray-800 mb-12 fade-in">What Our Community Says</h2>
+    <h2 class="text-4xl font-bold text-center text-gray-800 mb-12">What Our Community Says</h2>
     <div class="relative">
       <button id="scroll-left" class="scroll-btn absolute left-0 top-1/2 transform -translate-y-1/2 z-10">
         <i class="fas fa-chevron-left"></i>
       </button>
       <div id="testimonials-container" class="testimonials-container">
-        <div class="testimonial-card glassmorphism card-3d rounded-2xl overflow-hidden p-8 relative">
-          <div class="absolute -top-6 -left-6 w-12 h-12 rounded-full bg-green-100 flex items-center justify-center text-green-600">
-            <i class="fas fa-quote-left text-xl"></i>
-          </div>
+        <div class="testimonial-card card">
           <p class="text-gray-600 italic mb-6">"This website helped me reduce my water usage by 30%! The daily challenges make sustainability so easy."</p>
           <div class="flex items-center">
-            <div class="w-10 h-10 rounded-full bg-green-600 flex items-center justify-center text-white font-bold mr-3 avatar-zoom">A</div>
+            <div class="w-10 h-10 rounded-full bg-green-600 flex items-center justify-center text-white font-bold mr-3">A</div>
             <div>
               <h4 class="font-bold text-gray-800">Abdurashid</h4>
               <p class="text-sm text-gray-500">Member since 2023</p>
             </div>
           </div>
         </div>
-
-        <div class="testimonial-card glassmorphism card-3d rounded-2xl overflow-hidden p-8 relative">
-          <div class="absolute -top-6 -left-6 w-12 h-12 rounded-full bg-green-100 flex items-center justify-center text-green-600">
-            <i class="fas fa-quote-left text-xl"></i>
-          </div>
+        <div class="testimonial-card card">
           <p class="text-gray-600 italic mb-6">"I never knew small changes could make such a difference. GreenPledge opened my eyes to eco-friendly living!"</p>
           <div class="flex items-center">
-            <div class="w-10 h-10 rounded-full bg-amber-500 flex items-center justify-center text-white font-bold mr-3 avatar-zoom">S</div>
+            <div class="w-10 h-10 rounded-full bg-amber-500 flex items-center justify-center text-white font-bold mr-3">S</div>
             <div>
               <h4 class="font-bold text-gray-800">Nozima</h4>
               <p class="text-sm text-gray-500">Member since 2022</p>
             </div>
           </div>
         </div>
-
-        <div class="testimonial-card glassmorphism card-3d rounded-2xl overflow-hidden p-8 relative">
-          <div class="absolute -top-6 -left-6 w-12 h-12 rounded-full bg-green-100 flex items-center justify-center text-green-600">
-            <i class="fas fa-quote-left text-xl"></i>
-          </div>
+        <div class="testimonial-card card">
           <p class="text-gray-600 italic mb-6">"The community challenges are so motivating. I've saved 100kg of CO₂ thanks to GreenPledge!"</p>
           <div class="flex items-center">
-            <div class="w-10 h-10 rounded-full bg-blue-500 flex items-center justify-center text-white font-bold mr-3 avatar-zoom">M</div>
+            <div class="w-10 h-10 rounded-full bg-blue-500 flex items-center justify-center text-white font-bold mr-3">M</div>
             <div>
               <h4 class="font-bold text-gray-800">Sardor</h4>
               <p class="text-sm text-gray-500">Member since 2024</p>
             </div>
           </div>
         </div>
-
-        <div class="testimonial-card glassmorphism card-3d rounded-2xl overflow-hidden p-8 relative">
-          <div class="absolute -top-6 -left-6 w-12 h-12 rounded-full bg-green-100 flex items-center justify-center text-green-600">
-            <i class="fas fa-quote-left text-xl"></i>
-          </div>
+        <div class="testimonial-card card">
           <p class="text-gray-600 italic mb-6">"GreenPledge made me rethink my daily habits. Now I’m more conscious about my carbon footprint!"</p>
           <div class="flex items-center">
-            <div class="w-10 h-10 rounded-full bg-purple-500 flex items-center justify-center text-white font-bold mr-3 avatar-zoom">K</div>
+            <div class="w-10 h-10 rounded-full bg-purple-500 flex items-center justify-center text-white font-bold mr-3">K</div>
             <div>
               <h4 class="font-bold text-gray-800">Kamila</h4>
               <p class="text-sm text-gray-500">Member since 2023</p>
             </div>
           </div>
         </div>
-
-        <div class="testimonial-card glassmorphism card-3d rounded-2xl overflow-hidden p-8 relative">
-          <div class="absolute -top-6 -left-6 w-12 h-12 rounded-full bg-green-100 flex items-center justify-center text-green-600">
-            <i class="fas fa-quote-left text-xl"></i>
-          </div>
+        <div class="testimonial-card card">
           <p class="text-gray-600 italic mb-6">"Thanks to GreenPledge, I’ve cut down on single-use plastics and feel great about my impact!"</p>
           <div class="flex items-center">
-            <div class="w-10 h-10 rounded-full bg-red-500 flex items-center justify-center text-white font-bold mr-3 avatar-zoom">J</div>
+            <div class="w-10 h-10 rounded-full bg-red-500 flex items-center justify-center text-white font-bold mr-3">J</div>
             <div>
               <h4 class="font-bold text-gray-800">Jasur</h4>
               <p class="text-sm text-gray-500">Member since 2021</p>
             </div>
           </div>
         </div>
-
-        <div class="testimonial-card glassmorphism card-3d rounded-2xl overflow-hidden p-8 relative">
-          <div class="absolute -top-6 -left-6 w-12 h-12 rounded-full bg-green-100 flex items-center justify-center text-green-600">
-            <i class="fas fa-quote-left text-xl"></i>
-          </div>
+        <div class="testimonial-card card">
           <p class="text-gray-600 italic mb-6">"The tips and challenges are practical and fun. I’ve learned so much about sustainability!"</p>
           <div class="flex items-center">
-            <div class="w-10 h-10 rounded-full bg-teal-500 flex items-center justify-center text-white font-bold mr-3 avatar-zoom">Z</div>
+            <div class="w-10 h-10 rounded-full bg-teal-500 flex items-center justify-center text-white font-bold mr-3">Z</div>
             <div>
               <h4 class="font-bold text-gray-800">Zarina</h4>
               <p class="text-sm text-gray-500">Member since 2024</p>
@@ -801,17 +736,17 @@
 
   <!-- Leaderboard Section -->
   <section id="leaderboard-section" class="max-w-7xl mx-auto mb-20 py-20">
-    <h2 class="text-4xl font-bold text-center text-gray-800 mb-12 fade-in">Top Eco Warriors</h2>
+    <h2 class="text-4xl font-bold text-center text-gray-800 mb-12">Top Eco Warriors</h2>
     <div id="eco-warriors-list" class="grid md:grid-cols-3 gap-8">
       <!-- Dynamically populated -->
     </div>
   </section>
 
   <!-- Footer -->
-  <footer class="wave-footer bg-white/90 py-12 border-t border-gray-200 relative">
+  <footer class="bg-white py-12 border-t border-gray-200">
     <div class="max-w-7xl mx-auto px-6">
       <div class="grid md:grid-cols-5 gap-8 mb-8">
-        <div class="fade-in">
+        <div>
           <h3 class="text-lg font-bold text-gray-800 mb-4">GreenPledge</h3>
           <p class="text-gray-600 mb-4">Making sustainability simple, one day at a time.</p>
           <div class="flex space-x-4">
@@ -820,7 +755,7 @@
             <a href="#" class="social-icon text-gray-600"><i class="fab fa-facebook-f"></i></a>
           </div>
         </div>
-        <div class="fade-in">
+        <div>
           <h3 class="text-lg font-bold text-gray-800 mb-4">Resources</h3>
           <ul class="space-y-2">
             <li><a href="#" class="text-gray-600 hover:text-green-600">Eco Tips</a></li>
@@ -829,7 +764,7 @@
             <li><a href="#" class="text-gray-600 hover:text-green-600">Educational Materials</a></li>
           </ul>
         </div>
-        <div class="fade-in">
+        <div>
           <h3 class="text-lg font-bold text-gray-800 mb-4">About</h3>
           <ul class="space-y-2">
             <li><a href="#" class="text-gray-600 hover:text-green-600">Our Mission</a></li>
@@ -838,7 +773,7 @@
             <li><a href="#" class="text-gray-600 hover:text-green-600">Press</a></li>
           </ul>
         </div>
-        <div class="fade-in">
+        <div>
           <h3 class="text-lg font-bold text-gray-800 mb-4">Get Updates</h3>
           <p class="text-gray-600 mb-4">Join our newsletter for weekly eco-tips</p>
           <div class="flex">
@@ -848,7 +783,7 @@
             </button>
           </div>
         </div>
-        <div class="fade-in">
+        <div>
           <h3 class="text-lg font-bold text-gray-800 mb-4">Feedback</h3>
           <div id="feedback-form" class="space-y-4">
             <textarea id="feedback-text" class="w-full px-4 py-2 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-green-500" placeholder="Share your thoughts..."></textarea>
@@ -868,7 +803,6 @@
   </footer>
 
   <!-- Tawk.to Script -->
-  <!--Start of Tawk.to Script-->
   <script type="text/javascript">
     var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
     (function(){
@@ -880,7 +814,6 @@
       s0.parentNode.insertBefore(s1,s0);
     })();
   </script>
-  <!--End of Tawk.to Script-->
 
   <script type="module">
     import {
@@ -919,9 +852,11 @@
     const loginButton = document.getElementById('login-button');
     const signupButton = document.getElementById('signup-button');
     const profileButton = document.getElementById('profile-button');
+    const logoutButton = document.getElementById('logout-button');
     const mobileLoginButton = document.getElementById('mobile-login-button');
     const mobileSignupButton = document.getElementById('mobile-signup-button');
     const mobileProfileButton = document.getElementById('mobile-profile-button');
+    const mobileLogoutButton = document.getElementById('mobile-logout-button');
     const tryChallengeButton = document.getElementById('try-challenge-button');
     const saveChallengeButton = document.getElementById('save-challenge-button');
     const ctaSignupButton = document.getElementById('cta-signup');
@@ -954,6 +889,20 @@
     const ecoWarriorsList = document.getElementById('eco-warriors-list');
     const navUserName = document.getElementById('nav-user-name');
     const mobileNavUserName = document.getElementById('mobile-nav-user-name');
+    const profileSection = document.getElementById('profile-section');
+    const profileName = document.getElementById('profile-name');
+    const profileEmail = document.getElementById('profile-email');
+    const profileJoinDate = document.getElementById('profile-join-date');
+    const profileDaysActive = document.getElementById('profile-days-active');
+    const profileChallengesCompleted = document.getElementById('profile-challenges-completed');
+    const profileCo2Reduced = document.getElementById('profile-co2-reduced');
+    const savedChallengesList = document.getElementById('saved-challenges-list');
+    const profileTodayChallenge = document.getElementById('profile-today-challenge');
+    const profileChallengeImpactText = document.getElementById('profile-challenge-impact-text');
+    const profileTryChallengeButton = document.getElementById('profile-try-challenge-button');
+    const profileSaveChallengeButton = document.getElementById('profile-save-challenge-button');
+    const profileChallengeCompleted = document.getElementById('profile-challenge-completed');
+    const newChallengeButton = document.getElementById('new-challenge-button');
 
     // Initialize the app
     function initApp() {
@@ -962,7 +911,6 @@
         state.currentUser = loggedInUser;
         state.isAuthenticated = true;
 
-        // Update user object with badge if not present
         if (!state.currentUser.badge) {
           const xp = getXP();
           state.currentUser.badge = xp >= 100 ? "topWarrior" : "none";
@@ -971,6 +919,7 @@
 
         updateAuthUI();
         displayUserNameWithBadge();
+        updateProfileUI();
       }
       const storedCompletedChallenges = getCompletedChallengesWithProof();
       if (storedCompletedChallenges) {
@@ -979,8 +928,6 @@
       loadChallengeCompletions();
       generateDailyChallenge();
       setupEventListeners();
-      updateNavBackground();
-      setupScrollAnimations();
       updateTestimonialsScroll();
       updateChallengeCompletionRate();
       populateEcoWarriors();
@@ -1006,57 +953,22 @@
       progressBar.style.width = `${completionRate}%`;
     }
 
-    // Update navigation background on scroll
-    function updateNavBackground() {
-      window.addEventListener('scroll', () => {
-        if (window.scrollY > 50) {
-          nav.classList.add('glassmorphism', 'scrolled');
-        } else {
-          nav.classList.remove('glassmorphism', 'scrolled');
-        }
-      });
-    }
-
-    // Lazy-load hero background
-    function lazyLoadBackground() {
-      const heroBg = document.getElementById('hero-bg');
-      const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-          if (entry.isIntersecting) {
-            heroBg.style.backgroundImage = "url('8172235.jpg')";
-            observer.unobserve(heroBg);
-          }
-        });
-      });
-      observer.observe(heroBg);
-    }
-
-    // Parallax effect for hero background
-    function setupParallax() {
-      const heroBg = document.getElementById('hero-bg');
-      window.addEventListener('scroll', () => {
-        const scrollPosition = window.scrollY;
-        heroBg.style.transform = `scale(1.1) translateY(${scrollPosition * 0.3}px)`;
-      });
-    }
-
-    // Scroll animations for sections
-    function setupScrollAnimations() {
-      const elements = document.querySelectorAll('.fade-in, .staggered');
-      const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add('visible');
-            if (entry.target.querySelector('#challenge-progress-bar')) {
-              setTimeout(() => {
-                updateChallengeCompletionRate();
-              }, 500);
-            }
-          }
-        });
-      }, { threshold: 0.2 });
-
-      elements.forEach(element => observer.observe(element));
+    // Update profile UI
+    function updateProfileUI() {
+      if (!state.currentUser) return;
+      profileName.textContent = state.currentUser.name;
+      profileEmail.textContent = state.currentUser.email;
+      profileJoinDate.textContent = `Active member since ${new Date(state.currentUser.joinDate).getFullYear()}`;
+      const joinDate = new Date(state.currentUser.joinDate);
+      const today = new Date();
+      const daysActive = Math.floor((today - joinDate) / (1000 * 60 * 60 * 24));
+      profileDaysActive.textContent = daysActive;
+      profileChallengesCompleted.textContent = getCompletedChallenges();
+      profileCo2Reduced.textContent = `${getCompletedChallenges() * 10} kg`; // Example calculation
+      const savedChallenges = getSavedChallenges();
+      savedChallengesList.innerHTML = savedChallenges.length > 0 ? savedChallenges.map(ch => `<p class="text-gray-600">${ch}</p>`).join('') : "You haven't saved any challenges yet. Click 'New Challenge' to get started!";
+      profileTodayChallenge.textContent = state.currentChallenge;
+      profileChallengeImpactText.textContent = state.currentFact;
     }
 
     // Generate a new daily challenge
@@ -1067,6 +979,9 @@
       featuredChallenge.textContent = challenge;
       challengeImpactText.textContent = fact;
       document.getElementById('challenge-completed').classList.add('hidden');
+      profileTodayChallenge.textContent = challenge;
+      profileChallengeImpactText.textContent = fact;
+      profileChallengeCompleted.classList.add('hidden');
       updateChallengeCompletionRate();
     }
 
@@ -1181,11 +1096,6 @@
           mobileBadgeImg.className = 'badge-icon';
           mobileNavUserName.appendChild(mobileBadgeImg);
         }
-        // Show user stats
-        const userStats = document.getElementById('user-stats');
-        const mobileUserStats = document.getElementById('mobile-user-stats');
-        userStats.classList.remove('hidden');
-        mobileUserStats.classList.remove('hidden');
       }
     }
 
@@ -1195,13 +1105,13 @@
         { name: state.currentUser ? state.currentUser.name : "Demo User", badge: state.currentUser ? state.currentUser.badge : "topWarrior", xp: state.currentUser ? getXP() : 150 },
         { name: "EcoFan", badge: "topWarrior", xp: 120 },
         { name: "GreenStar", badge: "topWarrior", xp: 100 },
-      ].sort((a, b) => b.xp - a.xp); // Sort by XP descending
+      ].sort((a, b) => b.xp - a.xp);
 
       ecoWarriorsList.innerHTML = '';
       warriors.forEach((warrior, index) => {
         const place = index === 0 ? '🥇 1st Place' : index === 1 ? '🥈 2nd Place' : '🥉 3rd Place';
         const warriorEl = document.createElement('div');
-        warriorEl.className = 'glassmorphism card-3d rounded-2xl p-8 text-center';
+        warriorEl.className = 'card text-center';
         warriorEl.innerHTML = `
           <h3 class="text-xl font-bold text-gray-800 mb-2">${place}</h3>
           <p class="text-gray-600">
@@ -1220,12 +1130,10 @@
       signupButton.addEventListener('click', showSignupModal);
       mobileLoginButton.addEventListener('click', showLoginModal);
       mobileSignupButton.addEventListener('click', showSignupModal);
-      profileButton.addEventListener('click', () => {
-        window.location.href = "profile.html";
-      });
-      mobileProfileButton.addEventListener('click', () => {
-        window.location.href = "profile.html";
-      });
+      profileButton.addEventListener('click', showProfileSection);
+      mobileProfileButton.addEventListener('click', showProfileSection);
+      logoutButton.addEventListener('click', handleLogout);
+      mobileLogoutButton.addEventListener('click', handleLogout);
 
       closeAuthModal.addEventListener('click', closeModal);
       closeAuthSignup.addEventListener('click', closeModal);
@@ -1260,13 +1168,22 @@
 
       ctaSignupButton.addEventListener('click', () => {
         if (state.isAuthenticated) {
-          window.location.href = "profile.html";
+          showProfileSection();
         } else {
           showSignupModal();
         }
       });
 
       tryChallengeButton.addEventListener('click', () => {
+        if (!state.isAuthenticated) {
+          showLoginModal();
+          alert("Please log in to track your challenges!");
+          return;
+        }
+        showPhotoUploadModal();
+      });
+
+      profileTryChallengeButton.addEventListener('click', () => {
         if (!state.isAuthenticated) {
           showLoginModal();
           alert("Please log in to track your challenges!");
@@ -1309,6 +1226,7 @@
           saveUser(state.currentUser);
 
           document.getElementById('challenge-completed').classList.remove('hidden');
+          profileChallengeCompleted.classList.remove('hidden');
           alert("Great job completing today's challenge! 🌱 You've earned 10 XP!");
           gtag('event', 'challenge_completed', {
             'event_category': 'Engagement',
@@ -1317,6 +1235,7 @@
           updateAuthUI();
           displayUserNameWithBadge();
           populateEcoWarriors();
+          updateProfileUI();
           generateDailyChallenge();
           closePhotoUploadModalHandler();
         };
@@ -1333,11 +1252,31 @@
         if (!savedChallenges.includes(state.currentChallenge)) {
           savedChallenges.push(state.currentChallenge);
           saveSavedChallenges(savedChallenges);
+          updateProfileUI();
           alert("Challenge saved to your profile! 📌");
         } else {
           alert("You've already saved this challenge!");
         }
       });
+
+      profileSaveChallengeButton.addEventListener('click', () => {
+        if (!state.isAuthenticated) {
+          showLoginModal();
+          alert("Please log in to save challenges!");
+          return;
+        }
+        const savedChallenges = getSavedChallenges();
+        if (!savedChallenges.includes(state.currentChallenge)) {
+          savedChallenges.push(state.currentChallenge);
+          saveSavedChallenges(savedChallenges);
+          updateProfileUI();
+          alert("Challenge saved to your profile! 📌");
+        } else {
+          alert("You've already saved this challenge!");
+        }
+      });
+
+      newChallengeButton.addEventListener('click', generateDailyChallenge);
 
       mobileMenuToggle.addEventListener('click', () => {
         mobileMenu.classList.toggle('translate-x-full');
@@ -1350,7 +1289,7 @@
       document.querySelectorAll('.nav-link').forEach(link => {
         link.addEventListener('click', function(e) {
           const targetId = link.getAttribute('data-target');
-          if (!targetId) return; // Skip Reward Shop link
+          if (!targetId) return;
           e.preventDefault();
           const targetElement = document.getElementById(targetId);
           if (targetElement) {
@@ -1424,12 +1363,21 @@
 
     // Show signup modal
     function showSignupModal() {
-      authModal.classList.remove('opacity-0', 'pointer-events-none');
+      authModal.classList.remove('opacity-0', 'HASHTAG_GREENPLEDGEpointer-events-none');
       authModal.classList.add('opacity-100', 'pointer-events-auto', 'active');
       signupModal.classList.remove('hidden');
       loginModal.classList.add('hidden');
       trapFocus(signupModal);
       signupModal.querySelector('input').focus();
+    }
+
+    // Show profile section
+    function showProfileSection() {
+      document.querySelectorAll('section:not(#profile-section)').forEach(section => {
+        section.classList.add('hidden');
+      });
+      profileSection.classList.remove('hidden');
+      window.scrollTo({ top: 0, behavior: 'smooth' });
     }
 
     // Close modal
@@ -1464,6 +1412,7 @@
       state.isAuthenticated = true;
       updateAuthUI();
       displayUserNameWithBadge();
+      updateProfileUI();
       populateEcoWarriors();
       closeModal();
 
@@ -1501,19 +1450,33 @@
         name: name,
         email: email,
         joinDate: new Date(),
-        badge: "none" // New users start with no badge
+        badge: "none"
       };
 
       saveUser(state.currentUser);
       state.isAuthenticated = true;
       updateAuthUI();
       displayUserNameWithBadge();
+      updateProfileUI();
       populateEcoWarriors();
       closeModal();
 
       setTimeout(() => {
         alert(`Welcome to GreenPledge, ${name}!`);
       }, 300);
+    }
+
+    // Handle logout
+    function handleLogout() {
+      state.currentUser = null;
+      state.isAuthenticated = false;
+      localStorage.removeItem('user');
+      updateAuthUI();
+      document.querySelectorAll('section').forEach(section => {
+        section.classList.remove('hidden');
+      });
+      profileSection.classList.add('hidden');
+      window.scrollTo({ top: 0, behavior: 'smooth' });
     }
 
     // Update UI based on auth state
@@ -1524,24 +1487,28 @@
         mobileLoginButton.classList.add('hidden');
         mobileSignupButton.classList.add('hidden');
         profileButton.classList.remove('hidden');
+        logoutButton.classList.remove('hidden');
         mobileProfileButton.classList.remove('hidden');
+        mobileLogoutButton.classList.remove('hidden');
         tryChallengeButton.textContent = "I Did This!";
         saveChallengeButton.textContent = "Save Challenge";
-
-        // Show user stats (only the name now)
-        const userStats = document.getElementById('user-stats');
-        const mobileUserStats = document.getElementById('mobile-user-stats');
-        userStats.classList.remove('hidden');
-        mobileUserStats.classList.remove('hidden');
+        profileTryChallengeButton.textContent = "I Did This!";
+        profileSaveChallengeButton.textContent = "Save for Later";
+        document.getElementById('user-stats').classList.remove('hidden');
+        document.getElementById('mobile-user-stats').classList.remove('hidden');
       } else {
         loginButton.classList.remove('hidden');
         signupButton.classList.remove('hidden');
         mobileLoginButton.classList.remove('hidden');
         mobileSignupButton.classList.remove('hidden');
         profileButton.classList.add('hidden');
+        logoutButton.classList.add('hidden');
         mobileProfileButton.classList.add('hidden');
+        mobileLogoutButton.classList.add('hidden');
         tryChallengeButton.textContent = "Try Challenge";
         saveChallengeButton.textContent = "Save for Later";
+        profileTryChallengeButton.textContent = "Try Challenge";
+        profileSaveChallengeButton.textContent = "Save for Later";
         document.getElementById('user-stats').classList.add('hidden');
         document.getElementById('mobile-user-stats').classList.add('hidden');
       }
@@ -1559,8 +1526,6 @@
     // Initialize the app
     window.addEventListener('DOMContentLoaded', () => {
       initApp();
-      setupParallax();
-      lazyLoadBackground();
     });
   </script>
 </body>
